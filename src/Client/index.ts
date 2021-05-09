@@ -71,7 +71,6 @@ class ExtendedClient extends Client{
             const sql = `UPDATE Economy SET ${mode} = ${mode} + ${change} WHERE client_id = '${user_id}'`;
             con.query(sql, (err, result) => {
                 if (err) throw err;
-                console.log(`updated values: ${result}`);
                 con.destroy();
             });
         });
