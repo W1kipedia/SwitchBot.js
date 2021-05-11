@@ -1,3 +1,9 @@
+import { Intents } from 'discord.js';
 import Client from './Client';
 
-const e = new Client();e.init();
+const intents = new Intents(Intents.ALL)
+const e = new Client({
+    ws: {
+        intents: intents
+    }
+});e.init();

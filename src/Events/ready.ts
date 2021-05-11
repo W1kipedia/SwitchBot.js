@@ -4,5 +4,7 @@ export const event: Events = {
     name: 'ready',
     run:(client) => {
         console.log(`${client.user.tag} is online`);
+        // client.user.setActivity('the debugger', {type: "WATCHING"});
+        client.user.setPresence({status: 'online', activity: {name: "with the debugger", type: "PLAYING"}});
     }
 };

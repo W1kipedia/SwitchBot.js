@@ -1,6 +1,5 @@
 import { Client, Collection } from 'discord.js';
 import path from 'path';
-import * as MySQL from 'mysql';
 import { readdirSync } from 'fs';
 import { Command, Events, Config } from '../Interfaces';
 import { createConnection } from "mysql";
@@ -14,11 +13,6 @@ class ExtendedClient extends Client{
 
     public async init(): Promise<void>{
         this.login(this.config.token);
-        /*MySQL.createConnection({
-            "host": this.config.db.host,
-            "password": this.config.db.password,
-            "database": this.config.db.database
-        })*/
 
         const CommandPath = path.join(__dirname, "..", "Commands");
         readdirSync(CommandPath).forEach((dir) => {
