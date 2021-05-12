@@ -15,7 +15,7 @@ export const command: Command = {
         if (typeof reason !== 'string') reason = 'No Resson Was Provided';
         if (typeof member !== 'object') return;
 
-        const message = await msg.channel.send(`Are you sure you want to ban **${member.user.tag}**`);
+        const message = await msg.channel.send(`Are you sure you want to unmute **${member.user.tag}**`);
         await message.react('👍');
         await message.react('👎');
 
