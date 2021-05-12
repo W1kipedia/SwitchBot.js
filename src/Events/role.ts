@@ -40,7 +40,7 @@ export const event: Events = {
                         db.destroy();
                     } else {
                         // When translating all commands is complete, here is where a feature will go
-                        const query = `UPDATE Boosters SET currently_boosting = TRUE, months_boosted = months_boosted + 1`;
+                        const query = `UPDATE Boosters SET currently_boosting = TRUE, months_boosted = months_boosted + 1 WHERE client_id = '${oldMember.user.id}'`;
                         db.query(query, (err, result) => {
                             if (err) throw err;
 
@@ -58,7 +58,7 @@ export const event: Events = {
             db.connect((err) => {
                 if (err) throw err;
 
-                const query = `UPDATE Boosters SET currently_boosting = FALSE`;
+                const query = `UPDATE Boosters SET currently_boosting = FALSE WHERE client_id = '${oldMember.user.id}'`;
                 db.query(query, (err, result:any[]) => {
                     if (err) throw err;
 
