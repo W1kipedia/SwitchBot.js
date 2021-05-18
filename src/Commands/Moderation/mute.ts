@@ -1,4 +1,4 @@
-import { GuildMember, MessageReaction, Role, User } from 'discord.js';
+import { Collection, CollectorFilter, GuildMember, Message, MessageReaction, Role, User } from 'discord.js';
 import { createConnection } from 'mysql';
 import { Command } from '../../Interfaces'
 
@@ -15,41 +15,63 @@ export const command: Command = {
         if (typeof reason !== 'string') reason = 'No Resson Was Provided';
         if (typeof member !== 'object') return;
 
+        const MutedRole = await msg.guild.roles.fetch('696463147934154816');
+        const MemberRole = await msg.guild.roles.fetch('643121101035012126');
+        
         const message = await msg.channel.send(`Are you sure you want to mute **${member.user.tag}**`);
         await message.react('👍');
         await message.react('👎');
 
-        const check = (reaction: MessageReaction, user:User) => (reaction.emoji.name === '👍'||reaction.emoji.name === '👎')
-        && user.id === msg.author.id;
+        const filter = (reaction:MessageReaction, user:User) => { //filtering the reactions from the user
+            return (
+                ['👎', '👍'].includes(reaction.emoji.name) && user.id === msg.author.id
+            );
+        }
 
-        message.awaitReactions(check, {time: 10000})
-        .then(async (collected) => {
+        await message.awaitReactions(filter, {time: 10000,max: 1, errors: ['time']})
+        .then(collected => {
             const reaction = collected.first();
 
             if (reaction.emoji.name === '👍') {
                 message.delete();
-                const MutedRole = await msg.guild.roles.fetch('696463147934154816');
-                const MemberRole = await msg.guild.roles.fetch('643121101035012126');
                     
                 const db = createConnection(client.config.dbAll);
 
-                db.connect(async (err) => {
+                db.connect((err) => {
                     if (err) throw err;
 
-                    const query = `SELECT has_custom_role, custom_role_id FROM Boosters WHERE client_id = ${member.id}`;
+                    const q = `SELECT has_custom_role, custom_role_id FROM Boosters WHERE client_id = '${member.id}'`;
 
-                    db.query(query, async (err, result:any[]) => {
-                        if (err) throw err;
+                    console.log(q);
+                        db.query(q, (err, result:any[]) => {
+                            if (err) throw err;
 
-                        if (result.length === 1) {
-                            if (result[0].has_custom_role) {
-                                const customRole = await msg.guild.roles.fetch(result[0].custom_role_id)
-                                member.roles.remove(customRole);
-                            }
-                        };
+                            console.log(result.length);
+                            console.log(result);
 
-                    });
-                    db.destroy();
+                            if (result.length === 1) {
+                                console.log("entered if statement");
+                                if (result[0].has_custom_role) {
+
+                                    console.log("entered second if statement");
+
+                                    const id: string = result[0].custom_role_id.toString();
+
+                                    
+                                    member.roles.cache.forEach((role) => {
+                                        console.log(`${role.id} ${id} ${role.id === id}`)
+                                        if (role.id === id) {
+                                            console.log("just made it to the ForEach loop")
+                                            member.roles.remove(role);
+                                        }
+                                    });
+                                    console.log("done!");
+                                }
+                            };
+
+                        });
+                    console.log("alright destorying the cursor ig");
+                    db.end();
                 });
 
                 member.roles.add(MutedRole);
@@ -61,7 +83,11 @@ export const command: Command = {
                 msg.channel.send("Ah, alright.")
                 .then((messag) => messag.delete({timeout: 2000}));
             }
-        })
+        }).catch((collected: Collection<string, MessageReaction> ) => {
+            message.delete();
+            msg.channel.send("You took too long!")
+            .then((m) => m.delete({timeout: 3000}));
+        });
 
     }
 }
