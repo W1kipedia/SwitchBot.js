@@ -7,6 +7,7 @@ export const command: Command = {
     aliases: [],
     run: async (client, msg, args) => {
         if (args.length === 0) return;
+        if (!msg.guild.member(msg.author).permissions.has('KICK_MEMBERS')) return;
 
         const reason: string = args.length === 1 ? "No reason was provided" : args.shift().toString().replace(/,/g, ' ');
 
