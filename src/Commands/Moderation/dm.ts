@@ -6,7 +6,7 @@ export const command: Command = {
     aliases: [],
     run: async(client, msg, args) => {
         if (args.length < 2) return;
-        if (!msg.guild.member(msg.author).roles.cache.has('643128678804619316')) return;
+        if (!msg.member.roles.cache.has('643128678804619316')) return;
         const message = args.shift().toString().replace(/,/g, ' ');
 
         msg.channel.delete()

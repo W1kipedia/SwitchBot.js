@@ -7,7 +7,7 @@ export const command: Command = {
     "aliases": ["del", "purge"],
     run: async (client, msg, args) => {
         if (args.length === 0) {const amount: number = 2};
-        if (!msg.guild.member(msg.author).permissions.has('MANAGE_MESSAGES')) return;
+        if (!msg.member.permissions.has('MANAGE_MESSAGES')) return;
 
         const amount: number = parseInt((args[0] as string));
         if (!(typeof amount === 'number')) return;
