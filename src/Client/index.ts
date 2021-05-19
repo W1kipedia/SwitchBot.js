@@ -17,7 +17,7 @@ class ExtendedClient extends Client{
         const CommandPath = path.join(__dirname, "..", "Commands");
         readdirSync(CommandPath).forEach((dir) => {
             const commands = readdirSync(`${CommandPath}/${dir}`)
-            .filter((file) => file.endsWith('.ts'))
+            .filter((file) => (file.endsWith('.ts') && !file.endsWith('.d.ts')))
             
             for (const file of commands) {
                 const { command } = require(`${CommandPath}/${dir}/${file}`);
