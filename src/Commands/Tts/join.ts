@@ -9,6 +9,10 @@ export const command: Command = {
         if (msg.member.voice.channel) {
             if (!msg.guild.member(client.user).voice.channel) {
                 await msg.member.voice.channel.join();
+                msg.react('🤝')
+                .catch((err) => {
+                    console.error(err);
+                })
             } else {
                 client.voice.connections.array().
                 forEach(async (channel) => {

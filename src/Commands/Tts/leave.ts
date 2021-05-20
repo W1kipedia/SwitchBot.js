@@ -22,12 +22,9 @@ export const command: Command = {
                         if (channel.channel.members.array().length >= 0||
                         channel.channel.members.has(msg.author.id)) {
                             channel.disconnect();
-                            msg.react('844424386408087562')
-                            .then(() => {
-                                console.log("I have added reaction :D");
-                            })
-                            .catch(() => {
-                                msg.channel.send("it seems I cannot react to your message for some reason, weird.")
+                            msg.react('👋')
+                            .catch((err) => {
+                                console.log(err);
                             })
                         }
                     }
