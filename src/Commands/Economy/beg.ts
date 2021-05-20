@@ -14,7 +14,7 @@ export const command: Command = {
             const earnings: number = Math.floor(Math.random() * 420)
             msg.reply(`someone took pity for you and gave you ${earnings} snips`)
             .then(() => {
-                client.update_bank(msg.author.id, earnings, 'wallet')
+                client.update_bank(msg.author.id, earnings)
                 .catch((err) => {
                     throw new Error(err);
                 });

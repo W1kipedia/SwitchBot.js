@@ -57,7 +57,8 @@ class ExtendedClient extends Client{
             });
         });
     }
-    public async update_bank(user_id:string|number, change:number, mode:string) {
+    public async update_bank(user_id:string|number, change:number, mode?: 'bank'|'wallet') {
+        if (typeof mode === 'undefined'|| mode === null) mode = 'wallet';
         const con = createConnection(this.config.dbEconomy);
 
         con.connect((f) => {
