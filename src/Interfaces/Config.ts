@@ -4,11 +4,17 @@ export interface Config {
     dbEconomy: {
         host:string,
         database:string,
-        user:string
-        password:string},
+        user:string,
+        password:string
+    },
     dbAll: {
         host: string,
         database: string,
-        user: string
-        password: string}
+        user: string,
+        password: string
+    },
+    id: {
+        owner : number,
+        guestRole: number
+    }
 }
