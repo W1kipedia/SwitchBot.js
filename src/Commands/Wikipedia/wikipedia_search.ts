@@ -1,7 +1,6 @@
 import { Command } from "../../Interfaces";
 import wikipedia from 'wikipedia';
-import { Message, MessageEmbed, StoreChannel } from "discord.js";
-import { wikiSearchResult } from "wikipedia/dist/resultTypes";
+import { MessageEmbed } from "discord.js";
 
 export const command: Command = {
     name: 'wikipedia_search',

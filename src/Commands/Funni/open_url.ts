@@ -1,5 +1,5 @@
 import { Command } from '../../Interfaces';
-import  * as open from 'open';
+import open from 'open';
 
 export const command: Command = {
     name: 'open_url',
