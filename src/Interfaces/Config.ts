@@ -1,7 +1,6 @@
 export interface Config {
     token: string,
     prefix: string,
-    agreedToOpenUrl: boolean,
     dbEconomy: {
         host:string,
         database:string,
