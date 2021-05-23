@@ -5,6 +5,13 @@ export const command: Command = {
     description: 'Beg for money and someone might give you something👀',
     aliases: [],
     run: async (client, msg, args) => {
+        client.cooldowns.beg.forEach((begger) => {
+            if (begger === msg.author.id) {
+                msg.channel.send("You feel too guilty for begging to ask again for today...")
+                .catch(err => console.error(err))
+                return;
+            }
+        });
         await client.OpenAccount(msg.author.id);
 
         const outcomes = [true, false]
@@ -28,5 +35,12 @@ export const command: Command = {
                 console.error(err);
             })
         }
+        client.cooldowns.beg.push(msg.author.id);
+        setTimeout(() => {
+            const location = client.cooldowns.open_url.indexOf(msg.author.id);
+            if (location > -1) {
+                client.cooldowns.open_url.splice(location, 1);
+            }
+        }, 86400000)
     }
 }

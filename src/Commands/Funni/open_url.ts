@@ -7,7 +7,7 @@ export const command: Command = {
     aliases: [],
     run: async (client, msg, args) => {
         if (args.length === 0||args.length > 1) return;
-        if (!client.config.agreedToOpenUrl) {msg.channel.send("The owner has opted out of this option!"); return;}
+        if (!client.tempConfig.agreedToOpenUrl) {msg.channel.send("The owner has opted out of this option!"); return;}
         client.cooldowns.open_url.forEach((id:string) => {
             if (id === msg.author.id) {
                 msg.channel.send(`You're still on cooldown for ${(client.cooldowns.open_url[msg.author.id.toString()]) / (1000*60)} minutes!`)
