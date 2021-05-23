@@ -9,12 +9,12 @@ export const command: Command = {
 
         switch (args[0].toLowerCase()) {
             case 'in':
-                client.config.agreedToOpenUrl = true;
+                client.tempConfig.agreedToOpenUrl = true;
                 msg.channel.send('Configured!')
                     .catch((err) => console.error(err));
                 break;
             case 'out':
-                client.config.agreedToOpenUrl = false;
+                client.tempConfig.agreedToOpenUrl = false;
                 msg.channel.send('configured!')
                     .catch((err) => console.error(err));
                 break;
