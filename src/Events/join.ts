@@ -15,6 +15,10 @@ export const event: Events = {
         .forEach((channel:TextChannel) => {
             if (channel.id === '693942943039488050') {
                 channel.send(`${member.user.username} has joined the arena!`)
+                    .then((m) => {
+                        m.react(kirby)
+                            .catch(err => console.error(err))
+                    })
                     .catch(err => console.error(err))
             }
         })
