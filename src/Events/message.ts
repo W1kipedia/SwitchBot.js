@@ -4,7 +4,7 @@ import { readFile, unlink } from 'fs/promises';
 
 export const event: Events = {
     name: 'message',
-    run: (client, msg: Message) => {
+    run: async (client, msg: Message) => {
         if (!msg.guild) return; 
         if (msg.channel.id === '738155429342871623') {
             if (msg.author.id === client.config.id.owner.toString()) {

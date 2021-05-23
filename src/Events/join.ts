@@ -3,7 +3,7 @@ import { Events } from '../Interfaces';
 
 export const event: Events = {
     name: 'guildMemberAdd',
-    run: (client, member:GuildMember) => {
+    run: async (client, member:GuildMember) => {
         console.log(`${member.user.username} has joined the server!`);
         var kirby: GuildEmoji = undefined;
 
