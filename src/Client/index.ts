@@ -8,7 +8,12 @@ import ConfigJson from '../../data/config.json';
 class ExtendedClient extends Client{
     public commands: Collection<string, Command> = new Collection();
     public events: Collection<string, Events> = new Collection();
-    public cooldowns: {open_url?:[string], beg?: [string], gambleflip?: [string]} = {};
+    public cooldowns: {
+        open_url?:[string],
+        beg?: [string],
+        gambleflip?: [string],
+        rob?: [string]
+    } = {};
     public tempConfig: {agreedToOpenUrl?: boolean}= {}
     public config: Config = ConfigJson;
     public aliases: Collection<string, Command> = new Collection();
@@ -51,7 +56,7 @@ class ExtendedClient extends Client{
             const sql = `SELECT client_id FROM Economy WHERE client_id = '${user_id}'`;
             amogus.query(sql, (err, result: any[]) => {
                 if (err) throw err;
-                if (result.length === 0) {
+                if (!(result.length === 0)) {
                     const queue = `INSERT INTO Economy VALUES ('${user_id}', 69, 420)`;
                     amogus.query(queue, (problem, yeet) => {if (problem) throw problem;console.log(yeet)});
                     amogus.destroy();
