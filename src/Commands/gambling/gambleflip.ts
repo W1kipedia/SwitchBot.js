@@ -6,6 +6,13 @@ export const command: Command = {
     description: 'it\'s like coinflipping but gambling',
     aliases: [],
     run: async (client, msg, args) => {
+        client.cooldowns.gambleflip.forEach((flipper) => {
+            if (flipper === msg.author.id) {
+                msg.channel.send("You've already gambleflipped today...")
+                    .catch(err => console.error(err));
+                return;
+            }
+        });
         if (args.length === 0) return;
         try{const amount = parseInt((args[0] as string))}
         catch (error) {
@@ -35,5 +42,12 @@ export const command: Command = {
                     .catch((err) => console.error(err))
             }
         })
+        client.cooldowns.gambleflip.push(msg.author.id);
+        setTimeout(() => {
+            const location = client.cooldowns.gambleflip.indexOf(msg.author.id);
+            if (location > -1) {
+                client.cooldowns.gambleflip.splice(location, 1);
+            }
+        }, 86400000)
     }
 }

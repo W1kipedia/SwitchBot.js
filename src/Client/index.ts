@@ -8,7 +8,7 @@ import ConfigJson from '../../data/config.json';
 class ExtendedClient extends Client{
     public commands: Collection<string, Command> = new Collection();
     public events: Collection<string, Events> = new Collection();
-    public cooldowns: {open_url?:[string], beg?: [string]} = {};
+    public cooldowns: {open_url?:[string], beg?: [string], gambleflip?: [string]} = {};
     public tempConfig: {agreedToOpenUrl?: boolean}= {}
     public config: Config = ConfigJson;
     public aliases: Collection<string, Command> = new Collection();
