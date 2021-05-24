@@ -6,6 +6,7 @@ export const event: Events = {
     name: 'message',
     run: async (client, msg: Message) => {
         if (!msg.guild) return; 
+        if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `ss.help` to see all the commands!').catch(err => console.error(err));
         if (msg.channel.id === '738155429342871623') {
             if (msg.author.id === client.config.id.owner.toString()) {
                 msg.react('👍')
