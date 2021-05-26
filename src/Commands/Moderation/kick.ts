@@ -9,6 +9,12 @@ export const command: Command = {
         if (args.length === 0) return;
         if (!msg.member.permissions.has('KICK_MEMBERS')) return;
 
+        if (msg.mentions.members.first().user === client.user) {
+            msg.channel.send("no")
+                .catch(err => console.error(err));
+            return;
+        }
+
         const reason: string = args.length === 1 ? "No reason was provided" : args.shift().toString().replace(/,/g, ' ');
 
         const message = await msg.channel.send(`Are you sure you want to kick **${msg.mentions.members.first().user.tag}**`);

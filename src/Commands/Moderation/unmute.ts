@@ -10,6 +10,12 @@ export const command: Command = {
         if (args.length === 0 || args.length >= 3) return;
         if (!msg.member.roles.cache.has('643128678804619316')) return;
 
+        if (msg.mentions.members.first().user === client.user) {
+            msg.channel.send("no")
+                .catch(err => console.error(err));
+            return;
+        }
+
         const member: GuildMember = await msg.guild.members.fetch(msg.mentions.users.first().id);
         var reason: String = args[1];
 

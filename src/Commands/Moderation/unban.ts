@@ -11,6 +11,12 @@ export const command: Command = {
 
         const reason: string = args.length === 1 ? "No reason was provided" : args.shift().toString().replace(/,/g, ' ');
 
+        if (msg.mentions.members.first().user === client.user) {
+            msg.channel.send("no")
+                .catch(err => console.error(err));
+            return;
+        }
+
         const message = await msg.channel.send(`Are you sure you want to unban **${args[0]}**`);
         await message.react('👍');
         await message.react('👎');
