@@ -19,7 +19,8 @@ class ExtendedClient extends Client{
     public aliases: Collection<string, Command> = new Collection();
 
     public async init(): Promise<void>{
-        this.login(this.config.token);
+        this.login(this.config.token)
+            .catch(err => console.error(err));
 
         const CommandPath = path.join(__dirname, "..", "Commands");
         readdirSync(CommandPath).forEach((dir) => {
