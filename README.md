@@ -13,3 +13,7 @@
 * ## ***mysql@2.18.1***
 * ## ***open@8.0.9***
 * ## ***wikipedia@1.1.1***
+
+# *Compiled With*
+* ## ***ts-node-dev***
+* ## ***ts-node***
