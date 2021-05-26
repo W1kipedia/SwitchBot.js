@@ -8,12 +8,12 @@ export const event: Events = {
         var kirby: GuildEmoji = undefined;
 
         member.guild.emojis.cache.forEach((emoji:GuildEmoji) => {
-            if (emoji.id === '845826814865047572') kirby = emoji;
+            if (emoji.name.toLowerCase() === 'kirby') kirby = emoji;
         });
 
         member.guild.channels.cache.filter(c => c.type === 'text')
         .forEach((channel:TextChannel) => {
-            if (channel.id === '693942943039488050') {
+            if (channel.id === '693680984306221126') {
                 channel.send(`${member.user.username} has joined the arena!`)
                     .then((m) => {
                         m.react(kirby)
