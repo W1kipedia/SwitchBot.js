@@ -5,6 +5,8 @@ import { MessageEmbed } from "discord.js";
 export const command: Command = {
     name: 'wiki_page',
     description: 'Get the entire page content of an article (warning, this may not work all the time due to too many characters)',
+    public: true,
+    example: 's.wiki_page [Exact Page Name]'
     aliases: ['page'],
     run: async (client, msg, args) => {
         if (args.length === 0) return;
