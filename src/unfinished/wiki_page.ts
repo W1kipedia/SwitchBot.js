@@ -1,4 +1,4 @@
-import { Command } from "../../Interfaces";
+import { Command } from "../Interfaces";
 import wikipedia from 'wikipedia';
 import { MessageEmbed } from "discord.js";
 
