@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: 'ban',
     description: 'Ban someone, within reason of course...',
+    example: 's.ban @YaMomLmaoGottem { Optional Reason }',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         if (args.length === 0) return;
@@ -35,8 +37,11 @@ export const command: Command = {
                 msg.guild.members.fetch()
                 .then(async (members) => {
                     members.forEach(async (member) => {
-                        if (member.id === msg.mentions.members.first().id) await member.ban({reason: reason});
+                        if (member.id === msg.mentions.members.first().id) member.ban({reason: reason})
+                            .catch(err => msg.channel.send(`I cannot ban them because: \`${err}\``));
                     })
+                    message.delete();
+                    msg.delete();
                 })
                 .catch((err) => {
                     msg.channel.send("there was an error fetching members\nerror: `" + err + "`");

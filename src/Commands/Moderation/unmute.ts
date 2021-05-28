@@ -5,6 +5,8 @@ import { Command } from '../../Interfaces'
 export const command: Command = {
     "name": "unmute",
     "description": "Unmute someone!",
+    example: 's.unmute MuteMe#5420 { Optional reason }',
+    public: true,
     "aliases": [],
     run: async (client, msg, args) => {
         if (args.length === 0 || args.length >= 3) return;

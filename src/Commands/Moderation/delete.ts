@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     "name": "delete",
     "description": "Delete an amount of messages from a channel",
+    example: 's.delete 69',
+    public: true,
     "aliases": ["del", "purge"],
     run: async (client, msg, args) => {
         if (args.length === 0) {const amount: number = 2};

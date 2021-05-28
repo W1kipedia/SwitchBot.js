@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: 'kick',
     description: 'Kick Someone!',
+    example: 's.kick @KickMe { Optional reason }',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         if (args.length === 0) return;
