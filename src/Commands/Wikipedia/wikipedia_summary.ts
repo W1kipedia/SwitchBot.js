@@ -5,6 +5,8 @@ import { MessageEmbed } from "discord.js";
 export const command: Command = {
     name: 'wikipedia_summary',
     description: 'Get a summary of what wikipedia article you would like!',
+    example: 's.wikipedia_summary [Exact Page Name]',
+    public: true,
     aliases: ['wiki_summary', 'summary'],
     run: async (client, msg, args) => {
         if (args.length === 0) return;
