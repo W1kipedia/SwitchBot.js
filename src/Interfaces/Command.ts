@@ -8,6 +8,8 @@ interface Run {
 export interface Command {
     name: string,
     description?: string,
+    example?: string,
+    public: boolean,
     aliases: string[],
     run: Run
 }
