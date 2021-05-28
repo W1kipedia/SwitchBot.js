@@ -4,6 +4,8 @@ import { createConnection } from 'mysql';
 export const command: Command = {
     name: 'gambleflip',
     description: 'it\'s like coinflipping but gambling',
+    example: 's.gambleflip 69420',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         client.cooldowns.gambleflip.forEach((flipper) => {

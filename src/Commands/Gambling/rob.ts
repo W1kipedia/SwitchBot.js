@@ -5,6 +5,8 @@ import { GuildMember, MessageEmbed } from 'discord.js';
 export const command: Command = {
     name: 'rob',
     description: "Rob someone that has at least 100 snips in their wallet, there's a risk though!",
+    example: 's.rob @FourthHero',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         client.cooldowns.rob.forEach((robber) => {
