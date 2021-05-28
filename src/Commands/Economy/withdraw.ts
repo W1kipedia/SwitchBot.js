@@ -4,6 +4,8 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
     "name": "withdraw",
     "description": "withdraw snips from your bank!",
+    example: 's.withdraw 69420',
+    public: true,
     "aliases": [],
     run: async (client, msg, args) => {
         if (args.length <= 0) return;

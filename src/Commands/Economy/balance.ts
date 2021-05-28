@@ -5,7 +5,9 @@ import { createConnection } from 'mysql';
 export const command: Command = {
     "name": "balance",
     "description": "check the amount of money you have in your bank and wallet!",
+    public: true,
     "aliases": ['bal', 'wallet', 'mon', 'money', 'monz', 'cash', 'dough', 'moolah', 'monies', 'monie'],
+    example: 's.balance',
     run: async (client, msg, args) => {
         const db = createConnection(client.config.dbEconomy);
         db.connect((err):void => {

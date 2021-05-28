@@ -3,6 +3,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: 'beg',
     description: 'Beg for money and someone might give you something👀',
+    public: true,
+    example: 's.beg',
     aliases: [],
     run: async (client, msg, args) => {
         client.cooldowns.beg.forEach((begger) => {
