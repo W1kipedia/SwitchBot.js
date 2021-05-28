@@ -4,6 +4,8 @@ import open from 'open';
 export const command: Command = {
     name: 'open_url',
     description: 'Open a url on Wiki\'s computer!',
+    public: true,
+    example: 's.open_url https://github.com/W1kipedia/SwitchBot.js',
     aliases: [],
     run: async (client, msg, args) => {
         if (args.length === 0||args.length > 1) return;
