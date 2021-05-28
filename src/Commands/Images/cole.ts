@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: "cole",
     description: "cole moment",
+    example: 's.cole',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         const e = new MessageEmbed({ title: "cole moment" });
