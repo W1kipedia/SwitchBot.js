@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: "ping",
     description: "Simple ping command!",
+    example: 's.ping',
+    public: true,
     aliases: ['delay'],
     run: async(client, msg, args) => {
 

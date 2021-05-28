@@ -3,6 +3,9 @@ import { Command } from '../../Interfaces';
 
 export const command: Command = {
     name: 'help',
+    example: 's.help',
+    description: 'Get a list of all commands!',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         const em = new MessageEmbed({
