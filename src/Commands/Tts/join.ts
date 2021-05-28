@@ -3,6 +3,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: 'join',
     description: 'Make me join a voice call!',
+    example: 's.join',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
 

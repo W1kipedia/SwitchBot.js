@@ -6,6 +6,8 @@ import { VoiceConnection } from 'discord.js';
 export const command: Command = {
     name: 'speak',
     description: "If you can't/don't want to speak you can use this command!",
+    example: 's.speak [Message]',
+    public: true,
     aliases: [],
     run: async (client, msg, args) => {
         if (!msg.member.voice.channel) {msg.channel.send("you're not even in a channel lmao");return;}

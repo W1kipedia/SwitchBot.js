@@ -4,6 +4,8 @@ import { Command } from '../../Interfaces';
 export const command: Command = {
     name: 'leave',
     description: 'Make me leave a voice call',
+    example: 's.leave',
+    public: true,
     aliases: ['die', 'goaway', 'go_away', 'death'],
     run: async (client, msg, args) => {
         if (!msg.member.voice.channel) {
