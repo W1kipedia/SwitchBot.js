@@ -5,6 +5,7 @@ import { GuildMember } from 'discord.js';
 export const command: Command = {
     name: 'present_guest',
     aliases: ['guest', 'add_guest'],
+    public: false,
     run: async (client, msg, args) => {
         if (!(msg.author.id === client.config.id.owner.toString())) return;
         if (args.length === 0) {msg.channel.send("You must mention someone to add them as a guest!"); return;};

@@ -4,6 +4,7 @@ import { readFile } from 'fs/promises';
 export const command: Command = {
     name: 'remove_guest',
     aliases: ['unguest', 'revoke_guest'],
+    public: false,
     run: async (client, msg, args) => {
         if (!(msg.author.id === client.config.id.owner.toString())) return;
         

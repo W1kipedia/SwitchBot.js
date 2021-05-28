@@ -2,6 +2,7 @@ import { Command } from '../../Interfaces';
 
 export const command: Command = {
     name: 'opt',
+    public: false,
     aliases: [],
     run: async (client, msg, args) => {
         if (msg.author.id === '547971853990494208') return;
