@@ -5,6 +5,15 @@ export const event: Events = {
     run: async (client) => {
         console.log(`${client.user.tag} is online`);
         // client.user.setActivity('the debugger', {type: "WATCHING"});
-        client.user.setPresence({status: 'online', activity: {name: "with the debugger", type: "PLAYING"}});
+        var e = true;
+        setInterval(() => {
+            if (e) {
+                client.user.setPresence({status: 'online', activity: {name: "V1.0.0", type: "PLAYING"}});
+                e = false;
+            } else {
+                client.user.setPresence({status: 'online', activity: {name: "Typescript > Vanilla Javascript", type: "PLAYING"}});
+                e = true;
+            }
+        }, 6000)
     }
 };
