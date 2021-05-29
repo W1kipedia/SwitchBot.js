@@ -26,7 +26,7 @@ export const command: Command = {
                 },
                 {
                     name: '**Images**',
-                    value: '`alex` `candice` `cole` `cryson` `derp` `joe` `joey`'
+                    value: '`alex` `bingus` `candice` `cole` `cryson` `derp` `joe` `joey`'
                 },
                 {
                     name: '**Misc**',
