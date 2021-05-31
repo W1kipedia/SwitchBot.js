@@ -3,7 +3,7 @@
         "lib": ["ESNext"],
         "module": "CommonJS",
         "moduleResolution": "node",
-        "allowJS": false,
+        "allowJs": false,
         "target": "ESNext",
         "esModuleInterop": true,
         "experimentalDecorators": true,
