@@ -18,12 +18,7 @@ export const command: Command = {
         });
         if (denied) return;
         if (args.length === 0) return;
-        try{const amount = parseInt((args[0] as string))}
-        catch (error) {
-            msg.channel.send("You must provide an amount to gamble!")
-                .catch((err) => console.error(err));
-            return;
-        }
+        const amount = parseInt((args[0] as string))
         client.OpenAccount(msg.author.id);
         const choices = [true, false];
 
@@ -33,7 +28,7 @@ export const command: Command = {
             if (err) throw err;
 
             if (choices[Math.floor(Math.random() * choices.length)]) {
-                const earnings = Math.floor(Math.random() * 100);
+                const earnings = amount*2;
 
                 msg.channel.send(`You made ${earnings} snips!`)
                     .then(() => {
