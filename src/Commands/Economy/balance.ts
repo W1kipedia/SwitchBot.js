@@ -15,7 +15,7 @@ export const command: Command = {
             if (args.length > 0) {
                 const other : User = msg.mentions.users.first();
 
-                if (typeof other === 'object') client.OpenAccount(other.id); else return;
+                if (other) client.OpenAccount(other.id); else return;
 
                 const sql = `SELECT wallet, bank FROM Economy WHERE client_id = '${other.id}'`;
                 
@@ -35,6 +35,7 @@ export const command: Command = {
             } 
             
             else {
+                client.OpenAccount(msg.author.id);
                 const sql = `SELECT wallet, bank FROM Economy WHERE client_id = '${msg.author.id}'`;
 
 

@@ -8,13 +8,15 @@ export const command: Command = {
     public: true,
     aliases: [],
     run: async (client, msg, args) => {
+        var denied = false;
         client.cooldowns.gambleflip.forEach((flipper) => {
             if (flipper === msg.author.id) {
                 msg.channel.send("You've already gambleflipped today...")
                     .catch(err => console.error(err));
-                return;
+                denied = true;
             }
         });
+        if (denied) return;
         if (args.length === 0) return;
         try{const amount = parseInt((args[0] as string))}
         catch (error) {
@@ -22,7 +24,7 @@ export const command: Command = {
                 .catch((err) => console.error(err));
             return;
         }
-        await client.OpenAccount(msg.author.id);
+        client.OpenAccount(msg.author.id);
         const choices = [true, false];
 
         const conn = createConnection(client.config.dbEconomy);
@@ -35,12 +37,18 @@ export const command: Command = {
 
                 msg.channel.send(`You made ${earnings} snips!`)
                     .then(() => {
-                        const q = `UPDATE Economy SET wallet = ${earnings} WHERE client_id = '${msg.author.id}'`;
+                        const q = `UPDATE Economy SET wallet = wallet + ${earnings} WHERE client_id = '${msg.author.id}'`;
                         conn.query(q, (err) => {if (err) throw err});
                     })
                     .catch(err => console.error(err));
             } else {
-                msg.channel.send("after begging for some money you weren't able to get any money 😔")
+                const losings = Math.floor(Math.random() * 100);
+
+                msg.channel.send(`You lost ${losings} snips`)
+                    .then(() => {
+                        const q = `UPDATE Economy SET wallet = wallet - ${losings} WHERE client_id = '${msg.author.id}'`;
+                        conn.query(q, (err) => {if (err) throw err;})
+                    })
                     .catch((err) => console.error(err))
             }
         })
