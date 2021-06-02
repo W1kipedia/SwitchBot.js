@@ -1,5 +1,5 @@
 import { Events, Command } from '../Interfaces'
-import { Message } from 'discord.js';
+import { GuildEmoji, Message } from 'discord.js';
 import { readFile, unlink } from 'fs/promises';
 
 export const event: Events = {
@@ -8,12 +8,28 @@ export const event: Events = {
         if (!msg.guild) return; 
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
         if (msg.channel.id === '738155429342871623') {
+            var yes: GuildEmoji | string = '👍';
+            var no: GuildEmoji | string = '👎';
+            var think: GuildEmoji | string = '🤔';
+            msg.guild.emojis.cache.forEach((emote) => {
+                switch (emote.id) {
+                    case '849525435066482720':
+                        yes = emote;
+                        break;
+                    case '849525435066482720':
+                        no = emote;
+                        break;
+                    case '849525435066482720':
+                        think = emote;
+                        break;
+                }
+            });
             if (msg.author.id === '547971853990494208') {
-                msg.react('👍')
+                msg.react(yes)
                     .then(() => {
-                        msg.react('👎')
+                        msg.react(no)
                             .then(() => {
-                                msg.react("🤔")
+                                msg.react(think)
                                     .catch((err) => {
                                         console.error(err);
                                     })
@@ -30,11 +46,11 @@ export const event: Events = {
                 .then((data) => {
                     msg.guild.members.cache.forEach((member) => {
                         if (member.id === data) {
-                            msg.react('👍')
+                            msg.react(yes)
                                 .then(() => {
-                                    msg.react('👎')
+                                    msg.react(no)
                                         .then(() => {
-                                            msg.react("🤔")
+                                            msg.react(think)
                                                 .catch((err) => {
                                                     console.error(err);
                                                 })
