@@ -18,7 +18,7 @@ export const command: Command = {
                 },
                 {
                     name: '**Funni**',
-                    value: '`open_url`, `owo`'
+                    value: '`coinflip`, `open_url`, `owo`'
                 },
                 {
                     name: '**Gambling**',

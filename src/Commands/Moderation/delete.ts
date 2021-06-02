@@ -11,8 +11,8 @@ export const command: Command = {
         if (args.length === 0) {const amount: number = 2};
         if (!msg.member.permissions.has('MANAGE_MESSAGES')) return;
 
-        const amount: number = parseInt((args[0] as string));
-        if (!(typeof amount === 'number')) return;
+        var amount: number = parseInt((args[0] as string));
+        if (!(typeof amount === 'number')) amount = 2;
         
         if (msg.guild.member(msg.author).hasPermission('MANAGE_MESSAGES')) {
 
