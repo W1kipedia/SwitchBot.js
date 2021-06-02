@@ -18,23 +18,27 @@ export const command: Command = {
 
         const prompt = args.toString().replace(/,/g, ' ');
 
-        open(prompt);
-        msg.channel.send(`Opening \`${prompt}\``)
-        .then((m) => {
-            console.log(`Opening url ${prompt}`);
-        })
-        .then(() => {
-            client.cooldowns.open_url.push(msg.author.id);
-            setTimeout(() => {
-                const location = client.cooldowns.open_url.indexOf(msg.author.id);
-                if (location > -1) {
-                    client.cooldowns.open_url.splice(location, 1);
-                }
-            }, 7200000);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-
+        // istg if you one of you mfs reading the source code exploits this
+        // I'm going to be pissed >:c
+        // - Wiki
+        if (prompt.toLowerCase().startsWith('grabify')) {
+            msg.channel.send('no');
+        } else {
+            open(prompt);
+            msg.channel.send(`Opening \`${prompt}\``)
+            .then((m) => {
+                console.log(`Opening url ${prompt}`);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+        }
+        client.cooldowns.open_url.push(msg.author.id);
+        setTimeout(() => {
+            const location = client.cooldowns.open_url.indexOf(msg.author.id);
+            if (location > -1) {
+                client.cooldowns.open_url.splice(location, 1);
+            }
+        }, 7200000);
     }
 }

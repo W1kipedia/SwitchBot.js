@@ -21,8 +21,8 @@ export const command: Command = {
         const victim: GuildMember = msg.mentions.members.first();
         if (typeof victim === 'undefined'){msg.channel.send('You must mention someone to rob 😐').catch((err) => console.error(err)); return;}
 
-        await client.OpenAccount(msg.author.id);
-        await client.OpenAccount(victim.user.id);
+        client.OpenAccount(msg.author.id);
+        client.OpenAccount(victim.user.id);
         const outcomes = [true, false];
         const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
         const conn = createConnection(client.config.dbEconomy);

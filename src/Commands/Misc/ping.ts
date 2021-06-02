@@ -11,6 +11,6 @@ export const command: Command = {
 
         const m : Message = await msg.channel.send('Calculating ping... ⚙️');
 
-        setTimeout(() => m.edit("what, you want me to say the ping? No, cry about it."), 5000)
+        setTimeout(() => m.edit("what, you think I'm in the mood to calculate the ping? No, cry about it."), 5000)
     }
 }

@@ -46,7 +46,7 @@ export const command: Command = {
                 }
             ]
         });
-        em.setFooter(`Command by ${msg.author.tag}`, msg.author.avatarURL());
+        em.setFooter('https://github.com/W1kipedia/SwitchBot.js');
         msg.channel.send('', { embed: em })
             .catch(err => console.error(err));
     }
