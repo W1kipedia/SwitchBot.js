@@ -12,11 +12,17 @@ export const command: Command = {
         if (!msg.member.permissions.has('MANAGE_MESSAGES')) return;
 
         var amount: number = parseInt((args[0] as string));
-        if (!(typeof amount === 'number')) amount = 2;
         
         if (msg.guild.member(msg.author).hasPermission('MANAGE_MESSAGES')) {
 
-            if (msg.channel.type === 'text') msg.channel.bulkDelete(amount);
+            if (msg.channel.type === 'text') {
+                const channel = msg.channel;
+                channel.bulkDelete(amount)
+                    .catch(err => {
+                        channel.bulkDelete(2)
+                            .catch(err => console.error(err));
+                    });
+            }
 
         } else {
             msg.channel.send("❌ You don't have permissions. ❌");
