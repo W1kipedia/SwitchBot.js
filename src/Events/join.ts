@@ -14,7 +14,12 @@ export const event: Events = {
         member.guild.channels.cache.filter(c => c.type === 'text')
         .forEach((channel:TextChannel) => {
             if (channel.id === '693680984306221126') {
-                channel.send(`${member.user.username} has joined the arena!`)
+                const choices = [
+                    'joined the arena',
+                    'entered the server',
+                    'arrived'
+                ]
+                channel.send(`${member.user.username} has ${choices[Math.floor(Math.random() * choices.length)]}!`)
                     .then((m) => {
                         m.react(kirby)
                             .catch(err => console.error(err))
