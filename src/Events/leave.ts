@@ -4,6 +4,7 @@ import { Events } from '../Interfaces';
 export const event: Events = {
     name: 'guildMemberRemove',
     run: async (client, member:GuildMember) => {
+        console.log(`${member.user.tag} left the server!`);
         member.guild.channels.cache.filter(c => c.type === 'text')
             .forEach((channel: TextChannel) => {
                 if (channel.id === '693942943039488050') {
