@@ -12,8 +12,6 @@ export const command: Command = {
     run: async (client, msg, args) => {
         if (!args[0]) return;
         const CommandPath = path.join(__dirname, '..', '..', "Commands");
-        // const { command } = require(`${CommandPath}/Economy/balance.ts`);
-        // msg.channel.send(command.description);
         readdir(CommandPath)
             .then((p) => {
                 p.forEach((dir) => {
