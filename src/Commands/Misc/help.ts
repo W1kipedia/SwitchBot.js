@@ -1,4 +1,6 @@
 import { MessageEmbed } from 'discord.js';
+// import { readdir } from 'fs/promises';
+// import path from 'path';
 import { Command } from '../../Interfaces';
 
 export const command: Command = {
@@ -8,6 +10,14 @@ export const command: Command = {
     public: true,
     aliases: [],
     run: async (client, msg, args) => {
+        // const CommandPath = path.join(__dirname, '..', '..', "Commands");
+        // readdir(CommandPath)
+        //     .then((p) => {
+        //         p.forEach((dir) => {
+
+        //         });
+        //     })
+        //     .catch((err) => { })
         const em = new MessageEmbed({
             title: 'Help menu',
             color: 3447003,
@@ -44,9 +54,9 @@ export const command: Command = {
                     name: '**Wikipedia**',
                     value: '`wikipedia_search` `wikipedia_summary`'
                 }
-            ]
+            ],
+            footer: { text: 'https://github.com/W1kipedia/SwitchBot.js' }
         });
-        em.setFooter('https://github.com/W1kipedia/SwitchBot.js');
         msg.channel.send('', { embed: em })
             .catch(err => console.error(err));
     }
