@@ -9,6 +9,7 @@
 * ## ***discord.js@12.5.3***
 * ## ***@discordjs/opus@0.5.0***
 * ## ***@types/mysql***
+* ## ***@types/node***
 * ## ***gtts@0.2.1***
 * ## ***mysql@2.18.1***
 * ## ***open@8.0.9***
