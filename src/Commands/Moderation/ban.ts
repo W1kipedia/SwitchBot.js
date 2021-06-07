@@ -59,6 +59,7 @@ export const command: Command = {
 
         })
         .catch((collected: Collection<string, MessageReaction>) => {
+            msg.delete();
             message.delete();
             msg.channel.send("You took too long!")
             .then((m) => m.delete({ timeout: 3000 }));
