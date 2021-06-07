@@ -7,6 +7,21 @@ export const event: Events = {
     run: async (client, msg: Message) => {
         if (!msg.guild) return; 
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
+        msg.content.split(' ').forEach((word) => {
+            // inside of /data/profanity.txt you list a word to be censored by creating a word per line
+            readFile('../../data/profanity.txt', 'utf8')
+                .then((data) => {
+                    data.split('\n').forEach((word) => {
+                        msg.content.split(' ').forEach((w) => {
+                            if (word.toLowerCase() === w.toLowerCase()) {
+                                msg.delete()
+                                    .catch(err => console.error(err))
+                            }
+                        })
+                    });
+                })
+                .catch(err => console.error(err));
+        });
         if (msg.channel.id === '738155429342871623') {
             var yes: GuildEmoji | string = '👍';
             var no: GuildEmoji | string = '👎';
