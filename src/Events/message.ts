@@ -19,7 +19,7 @@ export const event: Events = {
                         
                         msg.content.split(' ').forEach((w) => {
                             if (re.test(w.toLowerCase())) {
-                                msg.delete()
+                                msg.delete({reason: `Said word: ${w}`})
                                     .catch(err => console.error(err))
                                 return;
                             }
