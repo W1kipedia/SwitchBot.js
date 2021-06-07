@@ -4,7 +4,6 @@ export const event: Events = {
     name: 'ready',
     run: async (client) => {
         console.log(`${client.user.tag} is online`);
-        // client.user.setActivity('the debugger', {type: "WATCHING"});
         var e = true;
         setInterval(() => {
             if (e) {
