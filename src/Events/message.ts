@@ -1,5 +1,6 @@
 import { Events, Command } from '../Interfaces'
 import { GuildEmoji, Message } from 'discord.js';
+import path from 'path';
 import { readFile, unlink } from 'fs/promises';
 
 export const event: Events = {
@@ -9,11 +10,14 @@ export const event: Events = {
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
         msg.content.split(' ').forEach((word) => {
             // inside of /data/profanity.txt you list a word to be censored by creating a word per line
-            readFile('../../data/profanity.txt', 'utf8')
+            const FilePath = path.join(__dirname, '..', '..', 'data');
+            readFile(`${FilePath}/profanity.txt`, 'utf8')
                 .then((data) => {
                     data.split('\n').forEach((word) => {
+                        const re = new RegExp(word, 'g');
+                        
                         msg.content.split(' ').forEach((w) => {
-                            if (word.toLowerCase() === w.toLowerCase()) {
+                            if (re.test(word.toLowerCase())) {
                                 msg.delete()
                                     .catch(err => console.error(err))
                             }
