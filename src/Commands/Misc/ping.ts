@@ -11,6 +11,11 @@ export const command: Command = {
 
         const m : Message = await msg.channel.send('Calculating ping... ⚙️');
 
-        setTimeout(() => m.edit("what, you think I'm in the mood to calculate the ping? No, cry about it."), 5000)
+        const outcomes = [
+            "what, you think I'm in the mood to calculate the ping? No, cry about it.",
+            `Latency is ${Date.now() - msg.createdTimestamp}ms\nAPI Latency is ${Math.round(client.ws.ping)}ms`
+        ]
+
+        setTimeout(() => m.edit(outcomes[Math.floor(Math.random() * outcomes.length)]), 5000)
     }
 }
