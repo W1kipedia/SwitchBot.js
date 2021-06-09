@@ -21,7 +21,7 @@ export const command: Command = {
             });
 
             const tts = new gTTS(args.toString().replace(/,/g, ' '), 'en');
-            tts.save('/tmp/audio.ogg', (err:Error, result:string) => {
+            tts.save('/tmp/audio.ogg', () => {
                 // I prefer to save it in my temp folder but you
                 // can choose whatever folder you want
                 // example vvv
