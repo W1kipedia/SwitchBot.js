@@ -13,9 +13,16 @@ export const command: Command = {
 
         const outcomes = [
             "what, you think I'm in the mood to calculate the ping? No, cry about it.",
-            `Latency is ${Date.now() - msg.createdTimestamp}ms\nAPI Latency is ${Math.round(client.ws.ping)}ms`
+            `Latency is ${(Date.now() - msg.createdTimestamp)}ms\nAPI Latency is ${Math.round(client.ws.ping)}ms`
         ]
 
-        setTimeout(() => m.edit(outcomes[Math.floor(Math.random() * outcomes.length)]), 5000)
+        setTimeout(() => {
+            if (msg.author.id === '547971853990494208') {
+                console.log("wiki detected")
+                m.edit(`Latency is ${(Date.now() - msg.createdTimestamp) - 5000}ms\nAPI Latency is ${Math.round(client.ws.ping)}ms`)
+            } else {
+                m.edit(outcomes[Math.floor(Math.random() * outcomes.length)])
+            }
+        }, 5000)
     }
 }
