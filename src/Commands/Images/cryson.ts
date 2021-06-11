@@ -17,7 +17,7 @@ export const command: Command = {
         if (typeof joe === 'undefined') joe = '🦧';
 
         await msg.channel.send(e)
-        .then((m) => m.delete({timeout: 3000, reason: "stop looking at audit logs >_>"}));
+        .then((m) => setTimeout(() => m.delete(), 3000))
         await msg.react(joe);
     }
 }
