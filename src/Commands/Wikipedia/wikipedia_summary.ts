@@ -34,7 +34,7 @@ export const command: Command = {
                                 footer: { text: `Command by ${msg.author.username}`, iconURL: msg.author.avatarURL() }
                             });
                             e.setThumbnail('https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png');
-                            msg.channel.send('I ran into a disambiguation!\n search one of these instead:', {embed: e});
+                            msg.channel.send({content: 'I ran into a disambiguation!\n search one of these instead:', embed: e});
                         })
                         .catch((err) => {
                             msg.channel.send("I see to have run into an error, displaying error!\n`" + err + "`");
@@ -52,7 +52,7 @@ export const command: Command = {
                     ]
                 });
                 em.setThumbnail('https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png');
-                msg.channel.send(em);
+                msg.channel.send({embed: em});
             })
             .catch(async (err) => {
                 msg.channel.send("Couldn't find the page `" + args.toString().replace(/,/g, ' ') + "`, maybe try searching for it?");
