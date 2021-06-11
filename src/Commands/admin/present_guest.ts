@@ -10,7 +10,7 @@ export const command: Command = {
         if (!(msg.author.id === client.config.id.owner.toString())) return;
         if (args.length === 0) {msg.channel.send("You must mention someone to add them as a guest!"); return;};
         const guest: GuildMember = msg.mentions.members.first();
-        const guestRole = await msg.guild.roles.fetch(client.config.id.guestRole.toString())
+        const guestRole = await msg.guild.roles.fetch(`${client.config.id.guestRole}`)
         
         writeFile("/tmp/guest.txt", guest.id)
         .then(() => {
