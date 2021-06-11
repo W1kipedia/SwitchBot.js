@@ -57,7 +57,7 @@ export const command: Command = {
             ],
             footer: { text: 'https://github.com/W1kipedia/SwitchBot.js' }
         });
-        msg.channel.send('', { embed: em })
+        msg.channel.send({embed: em})
             .catch(err => console.error(err));
     }
 }
