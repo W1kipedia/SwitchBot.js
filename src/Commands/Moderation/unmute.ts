@@ -73,12 +73,12 @@ export const command: Command = {
                     message.delete();
                     msg.delete();
                     msg.channel.send("Ah, alright.")
-                        .then((messag) => messag.delete({ timeout: 2000 }));
+                        .then((messag) => setTimeout(() => messag.delete(), 2000));
                 }
             }).catch((collected: Collection<string, MessageReaction>) => {
                 message.delete();
                 msg.channel.send("You took too long!")
-                    .then((m) => m.delete({ timeout: 3000 }));
+                    .then((m) => setTimeout(() => m.delete(), 2000));
             });
 
     }

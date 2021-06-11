@@ -13,7 +13,7 @@ export const command: Command = {
 
         var amount: number = parseInt((args[0] as string));
         
-        if (msg.guild.member(msg.author).hasPermission('MANAGE_MESSAGES')) {
+        if (msg.guild.members.cache.get(msg.author.id).permissions.has('MANAGE_MESSAGES')) {
 
             if (msg.channel.type === 'text') {
                 const channel = msg.channel;

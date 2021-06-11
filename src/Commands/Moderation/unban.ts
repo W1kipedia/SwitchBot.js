@@ -34,28 +34,27 @@ export const command: Command = {
                 const reaction = collected.first();
 
                 if (reaction.emoji.name === '👍') {
-                    msg.guild.fetchBans()
-                    .then((bans) => {
-                        bans.forEach((ban) => {
+                    try {
+                        msg.guild.bans.cache.forEach((ban) => {
                             if (ban.user.tag === args[0]) msg.guild.members.unban(ban.user, reason);
                         });
-                    })
-                    .catch((err) => {
-                        msg.channel.send("Person was not found! :c");
-                    });
+                    } catch {
+                        msg.channel.send("Could not find the person :(")
+                            .catch(err => console.error(err))
+                    }
                     await msg.channel.send(`Successfully unbanned ${args[0]}`);
                 } else {
                     await message.delete();
                     await msg.delete();
                     msg.channel.send("Ok then..")
-                        .then((messag) => messag.delete({ timeout: 2000 }));
+                        .then((messag) => setTimeout(() => messag.delete(), 2000));
                 }
 
             })
             .catch((collected: Collection<string, MessageReaction>) => {
                 message.delete();
                 msg.channel.send("You took too long!")
-                    .then((m) => m.delete({ timeout: 3000 }));
+                    .then((m) => setTimeout(() => m.delete(), 2000));
             });
 
     }

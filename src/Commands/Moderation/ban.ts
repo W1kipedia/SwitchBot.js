@@ -54,7 +54,7 @@ export const command: Command = {
                 await message.delete();
                 await msg.delete();
                 msg.channel.send("Ok then..")
-                .then((messag) => messag.delete({ timeout: 2000 }));
+                    .then((messag) => setTimeout(() => messag.delete(), 2000));
             }
 
         })
@@ -62,7 +62,7 @@ export const command: Command = {
             msg.delete();
             message.delete();
             msg.channel.send("You took too long!")
-            .then((m) => m.delete({ timeout: 3000 }));
+                .then((m) => setTimeout(() => m.delete(), 2000));
         });
 
     }

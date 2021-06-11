@@ -17,13 +17,17 @@ export const command: Command = {
             .then((messag) => {
                 msg.channel.send("Done!")
                 .then((m) => {
-                    m.delete({timeout: 4000});
+                    setTimeout(() => {
+                        m.delete();
+                    }, 4000);
                 })
             })
             .catch((err) => {
                 msg.channel.send("It seems like the person you're trying to DM has their DMs closed :c")
                 .then((m) => {
-                    m.delete({timeout: 4000});
+                    setTimeout(() => {
+                        m.delete();
+                    }, 4000);
                 })
                 .catch((e) => {
                     console.error(e);
