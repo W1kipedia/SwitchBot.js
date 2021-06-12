@@ -5,7 +5,9 @@
 
 ![Switch N' Snap Banner](https://user-images.githubusercontent.com/13318752/108582227-6d3af100-72f7-11eb-8670-e7514d4d0d17.png)
 
-# *Deps*
+## ***To set it up yourself you can download the deps using `npm i`***
+
+<!-- # *Deps*
 * ## ***discordjs/discord.js***
 * ## ***@discordjs/opus@0.5.0***
 * ## ***@types/mysql***
@@ -17,4 +19,4 @@
 
 # *Compiled With*
 * ## ***ts-node-dev***
-* ## ***ts-node***
+* ## ***ts-node*** -->
