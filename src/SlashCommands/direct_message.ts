@@ -21,6 +21,11 @@ export const slashCommand: SlashCommand = {
 					ephemeral: true
 				})
 			});
+		} else {
+			interaction.reply({
+				content: 'You must be staff to use this command!',
+				ephemeral: true
+			})
 		}
 	}
 }
