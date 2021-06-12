@@ -8,7 +8,7 @@ export const event: Events = {
         setInterval(() => {
             if (e) {
                 // client.user.setPresence({status: 'online', activities: [{name: "V1.0.1", type: "PLAYING"}}]);
-                client.user.setPresence({status: 'online', activities: [{name: "V1.0.1", type: "PLAYING"}]});
+                client.user.setPresence({status: 'online', activities: [{name: "V1.0.2", type: "PLAYING"}]});
                 e = false;
             } else {
                 client.user.setPresence({status: 'online', activities: [{name: "Typescript > Vanilla Javascript", type: "PLAYING"}]});
