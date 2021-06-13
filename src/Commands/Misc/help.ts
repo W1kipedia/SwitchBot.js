@@ -24,35 +24,35 @@ export const command: Command = {
             fields: [
                 {
                     name: '**Economy**',
-                    value: '`balance` `beg` `deposit` `give` `withdraw`'
+                    value: '`balance`, `beg`, `deposit`, `give`, `withdraw`'
                 },
                 {
                     name: '**Funni**',
-                    value: '`coinflip`, `open_url`, `owo`'
+                    value: '`8ball`, `coinflip`, `open_url`, `owo`, `sponsor`'
                 },
                 {
                     name: '**Gambling**',
-                    value: '`gambleflip` `rob`'
+                    value: '`gambleflip`, `rob`'
                 },
                 {
                     name: '**Images**',
-                    value: '`alex` `bingus` `candice` `cole` `cryson` `derp` `joe` `joey`'
+                    value: '`alex`, `bingus`, `candice`, `cole`, `cryson`, `derp`, `joe`, `joey`'
                 },
                 {
                     name: '**Misc**',
-                    value: '`help` `ping`'
+                    value: '`help`, `info`, `ping`'
                 },
                 {
                     name: '**Moderation**',
-                    value: '`ban` `delete` `dm` `kick` `mute` `unban` `unmute`'
+                    value: '`ban`, `delete`, `dm`, `kick`, `mute`, `unban`, `unmute`'
                 },
                 {
                     name: '**Tts**',
-                    value: '`join` `leave` `speak`'
+                    value: '`join`, `leave`, `speak`'
                 },
                 {
                     name: '**Wikipedia**',
-                    value: '`wikipedia_search` `wikipedia_summary`'
+                    value: '`wikipedia_search`, `wikipedia_summary`'
                 }
             ],
             footer: { text: 'https://github.com/W1kipedia/SwitchBot.js' }

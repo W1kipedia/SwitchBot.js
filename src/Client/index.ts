@@ -12,7 +12,8 @@ class ExtendedClient extends Client{
         open_url: [],
         beg: [],
         gambleflip: [],
-        rob: []
+        rob: [],
+        sponsor: []
     };
     public tempConfig: {agreedToOpenUrl?: boolean}= {}
     public config: Config = ConfigJson;
