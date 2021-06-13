@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
-// import { readdir } from 'fs/promises';
-// import path from 'path';
+import { readdir } from 'fs/promises';
+import { join } from 'path';
 import { Command } from '../../Interfaces';
 
 export const command: Command = {
@@ -10,49 +10,52 @@ export const command: Command = {
     public: true,
     aliases: [],
     run: async (client, msg, args) => {
-        // const CommandPath = path.join(__dirname, '..', '..', "Commands");
-        // readdir(CommandPath)
-        //     .then((p) => {
-        //         p.forEach((dir) => {
+        async function loopDir(dirname:string):Promise<string> {
+            var final = '';
+            const files = await readdir(dirname)
+                files.forEach((file) => {
+                    if (file.endsWith('.ts') && !(file.endsWith('.d.ts'))) {
+                        final += `\`${file.replace('.ts', '')}\`, `
+                    }
+                });
+            return final.substring(0, final.length-2);
+        }
 
-        //         });
-        //     })
-        //     .catch((err) => { })
         const em = new MessageEmbed({
             title: 'Help menu',
             color: 3447003,
             fields: [
                 {
                     name: '**Economy**',
-                    value: '`balance`, `beg`, `deposit`, `give`, `withdraw`'
+                    value: `${await loopDir(join(__dirname, '..', 'Economy'))}`
                 },
                 {
                     name: '**Funni**',
-                    value: '`8ball`, `coinflip`, `open_url`, `owo`, `sponsor`'
+                    value: `${await loopDir(join(__dirname, '..', 'Funni'))}`
                 },
                 {
                     name: '**Gambling**',
-                    value: '`gambleflip`, `rob`'
+                    value: `${await loopDir(join(__dirname, '..', 'Gambling'))}`
                 },
                 {
                     name: '**Images**',
-                    value: '`alex`, `bingus`, `candice`, `cole`, `cryson`, `derp`, `joe`, `joey`'
+                    value: `${await loopDir(join(__dirname, '..', 'Images'))}`
                 },
                 {
                     name: '**Misc**',
-                    value: '`help`, `info`, `ping`'
+                    value: `${await loopDir(join(__dirname, '..', 'Misc'))}`
                 },
                 {
                     name: '**Moderation**',
-                    value: '`ban`, `delete`, `dm`, `kick`, `mute`, `unban`, `unmute`'
+                    value: `${await loopDir(join(__dirname, '..', 'Moderation'))}`
                 },
                 {
                     name: '**Tts**',
-                    value: '`join`, `leave`, `speak`'
+                    value: `${await loopDir(join(__dirname, '..', 'Tts'))}`
                 },
                 {
                     name: '**Wikipedia**',
-                    value: '`wikipedia_search`, `wikipedia_summary`'
+                    value: `${await loopDir(join(__dirname, '..', 'Wikipedia'))}`
                 }
             ],
             footer: { text: 'https://github.com/W1kipedia/SwitchBot.js' }
