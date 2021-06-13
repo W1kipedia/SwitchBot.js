@@ -1,43 +1,56 @@
 import { MessageEmbed } from 'discord.js';
+import { join } from 'path';
+import { readdir } from 'fs/promises';
 import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
 	run: async (interaction) => {
+		async function loopDir(dirname: string): Promise<string> {
+			var final = '';
+			const files = await readdir(dirname);
+				files.forEach((file) => {
+					if (file.endsWith('.ts') && !(file.endsWith('.d.ts'))) {
+						final += `\`${file.replace('.ts', '')}\`, `
+					}
+				});
+			return final.substring(0, final.length - 2);
+		}
+
 		const em = new MessageEmbed({
 			title: 'Help menu',
 			color: 3447003,
 			fields: [
 				{
 					name: '**Economy**',
-					value: '`balance` `beg` `deposit` `give` `withdraw`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Economy'))}`
 				},
 				{
 					name: '**Funni**',
-					value: '`coinflip`, `open_url`, `owo`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Funni'))}`
 				},
 				{
 					name: '**Gambling**',
-					value: '`gambleflip` `rob`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Gambling'))}`
 				},
 				{
 					name: '**Images**',
-					value: '`alex` `bingus` `candice` `cole` `cryson` `derp` `joe` `joey`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Images'))}`
 				},
 				{
 					name: '**Misc**',
-					value: '`help` `ping`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Misc'))}`
 				},
 				{
 					name: '**Moderation**',
-					value: '`ban` `delete` `dm` `kick` `mute` `unban` `unmute`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Moderation'))}`
 				},
 				{
 					name: '**Tts**',
-					value: '`join` `leave` `speak`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Tts'))}`
 				},
 				{
 					name: '**Wikipedia**',
-					value: '`wikipedia_search` `wikipedia_summary`'
+					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Wikipedia'))}`
 				}
 			],
 			footer: { text: 'https://github.com/W1kipedia/SwitchBot.js' }
