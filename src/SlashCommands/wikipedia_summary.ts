@@ -7,7 +7,7 @@ export const slashCommand: SlashCommand = {
 		wikipedia.page(interaction.options.array()[0].value.toString())
 			.then(async (page) => {
 				const summary = (await page.summary()).extract;
-				const thumbnail = await page.images();
+				const thumbnails = await page.images();
 
 				if (summary.toLowerCase().endsWith('may refer to:')) {
 					wikipedia.search(interaction.options.array()[0].value.toString())
@@ -44,7 +44,13 @@ export const slashCommand: SlashCommand = {
 						{ name: 'Wikipedia Summary', value: summary, inline: true }
 					]
 				});
-				em.setThumbnail('https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png');
+				const AvailableThumbnails: string[] = [];
+				thumbnails.forEach((thumbnail) => {
+					if (thumbnail.url.endsWith('.jpg') || thumbnail.url.endsWith('.png')) {
+						AvailableThumbnails.push(thumbnail.url);
+					}
+				});
+				em.setThumbnail(AvailableThumbnails.length === 0 ?'https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png': AvailableThumbnails[0]);
 				interaction.reply({ embeds: [em], ephemeral: true});
 			})
 			.catch(async (err) => {
