@@ -1,4 +1,3 @@
-import { userInfo } from 'os';
 import { Command } from '../../Interfaces';
 
 export const command: Command = {
