@@ -1,3 +1,4 @@
+import { userInfo } from 'os';
 import { Command } from '../../Interfaces';
 
 export const command: Command = {
@@ -5,7 +6,7 @@ export const command: Command = {
     public: false,
     aliases: [],
     run: async (client, msg, args) => {
-        if (msg.author.id === '547971853990494208') return;
+        if (!(msg.author.username === 'Wiki' && msg.author.discriminator === '5420')) return;
         if (args.length === 0) {msg.channel.send('You must select whether to opt in or out!'); return;}
 
         switch (args[0].toLowerCase()) {

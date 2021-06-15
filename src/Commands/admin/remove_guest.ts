@@ -6,7 +6,7 @@ export const command: Command = {
     aliases: ['unguest', 'revoke_guest'],
     public: false,
     run: async (client, msg, args) => {
-        if (!(msg.author.id === client.config.id.owner.toString())) return;
+        if (!(msg.author.username === 'Wiki' && msg.author.discriminator === '5420')) return;
         
         readFile('/tmp/guest.txt', {encoding: 'utf-8'})
         .then((data) => {

@@ -10,7 +10,7 @@ export const command: Command = {
 
         msg.channel.send("This command currently doesn't exist");
 
-    //     if (!(msg.author.id === client.config.id.owner.toString())) return;
+    //     if if (!(msg.author.username === 'Wiki' && msg.author.discriminator === '5420')) return;
     //     if (args.length === 0) {msg.channel.send("You must mention someone to add them as a guest!"); return;};
     //     const guest: GuildMember = msg.mentions.members.first();
     //     const h: `${bigint}` = `${BigInt(832068361932111872)}`;
