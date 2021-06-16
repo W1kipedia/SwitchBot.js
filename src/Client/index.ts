@@ -1,7 +1,7 @@
 import { Client, Collection, User } from 'discord.js';
 import path from 'path';
 import { readdirSync } from 'fs';
-import { Command, Events, Config } from '../Interfaces';
+import { Command, Events, Config, TempConfig } from '../Interfaces';
 import { createConnection } from "mysql";
 import ConfigJson from '../../data/config.json';
 
@@ -15,7 +15,10 @@ class ExtendedClient extends Client{
         rob: [],
         sponsor: []
     };
-    public tempConfig: {agreedToOpenUrl?: boolean}= {}
+    public static tempConfig: TempConfig = {
+        agreedToOpenUrl: false,
+        summaryPosition: []
+    }
     public config: Config = ConfigJson;
     public aliases: Collection<string, Command> = new Collection();
 
