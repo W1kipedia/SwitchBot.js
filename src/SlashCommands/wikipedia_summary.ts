@@ -1,4 +1,5 @@
-import { MessageEmbed, MessageEmbedThumbnail } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
+import client from '../Client';
 import wikipedia from 'wikipedia';
 import { SlashCommand } from '../Interfaces';
 
@@ -7,7 +8,9 @@ export const slashCommand: SlashCommand = {
 		wikipedia.page(interaction.options.array()[0].value.toString())
 			.then(async (page) => {
 				const summary = (await page.summary()).extract;
-				const thumbnails = await page.images();
+				const thumbnails = (await page.images())
+				.map(image => image.url)
+				.filter(url => url.endsWith('.jpg') || url.endsWith('.png'));
 
 				if (summary.toLowerCase().endsWith('may refer to:')) {
 					wikipedia.search(interaction.options.array()[0].value.toString())
@@ -44,14 +47,75 @@ export const slashCommand: SlashCommand = {
 						{ name: 'Wikipedia Summary', value: summary, inline: true }
 					]
 				});
-				const AvailableThumbnails: string[] = [];
-				thumbnails.forEach((thumbnail) => {
-					if (thumbnail.url.endsWith('.jpg') || thumbnail.url.endsWith('.png')) {
-						AvailableThumbnails.push(thumbnail.url);
-					}
-				});
-				em.setThumbnail(AvailableThumbnails.length === 0 ?'https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png': AvailableThumbnails[0]);
-				interaction.reply({ embeds: [em], ephemeral: true});
+
+				var HasWikipeidaLogo = false;
+				if (thumbnails.length === 0) {
+					em.setThumbnail('https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png')
+					HasWikipeidaLogo = true;
+				} else {
+					em.setThumbnail(thumbnails[0]);
+				}
+
+				HasWikipeidaLogo ? interaction.reply({
+				// checks if the default wikipedia logo is on the embed
+					embeds: [em],
+					ephemeral: true,
+					components: [
+						{
+							type: 1,
+							components: [
+								{
+									type: 2,
+									label: 'View Full Page',
+									style: 5,
+									url: page.fullurl
+								}
+							]
+						}
+					]
+				})
+				: 
+				//if not then it'll add buttons to the interaction
+				interaction.reply({
+					embeds: [em],
+					ephemeral: true,
+					components: [
+						{
+							type: 1,
+							components: [
+							{
+								type: 2,
+								label: 'View Full Page',
+								style: 5,
+								url: page.fullurl
+							},
+							{
+								type: 2,
+								style: 1,
+								customID: 'wikipedia_pageBack',
+								disabled: true
+							},
+							{
+								type: 2,
+								style: 1,
+								customID: 'wikipedia_pageForward',
+								disabled: false
+							}
+							]
+						}
+					]
+				})
+					// then we'll set the tempconfig
+					.then(() => {
+						interaction.fetchReply()
+						.then((msg) => {
+							client.tempConfig.summaryPosition.push({
+								Position: 0,
+								id: parseInt(msg.id),
+								ImageArray: thumbnails
+							})
+						})
+					})
 			})
 			.catch(async (err) => {
 				interaction.reply({content: "Couldn't find the page `" + interaction.options.array()[0].value.toString() + "`, maybe try searching for it?", ephemeral: true});
