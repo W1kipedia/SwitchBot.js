@@ -1,7 +1,7 @@
 import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
-	run: async (interaction) => {
+	run: async (client, interaction) => {
 		if (interaction.guild.members.cache.get(interaction.user.id).roles.cache.has('643128678804619316')) {
 			const person_to_send_msg_to = interaction.guild.members.cache.get(interaction.options.array()[0].user.id);
 

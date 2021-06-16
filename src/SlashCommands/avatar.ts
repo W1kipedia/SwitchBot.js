@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
-	run: async (interaction) => {
+	run: async (client, interaction) => {
 		if (!(interaction.options.array().toString())) {
 			const em = new MessageEmbed({
 				title: 'Avatar',

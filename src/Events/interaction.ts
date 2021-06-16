@@ -8,7 +8,7 @@ export const event: Events = {
 		if (interaction.isCommand()) {
 			const path = join(__dirname, '..', 'SlashCommands');
 			const { slashCommand } = require(`${path}/${interaction.commandName.toLowerCase()}.ts`);
-			await slashCommand.run(interaction);
+			await slashCommand.run(client, interaction);
 		}
 	}
 }

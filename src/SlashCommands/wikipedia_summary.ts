@@ -1,10 +1,9 @@
 import { MessageEmbed } from 'discord.js';
-import client from '../Client';
 import wikipedia from 'wikipedia';
 import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
-	run: async (interaction) => {
+	run: async (client, interaction) => {
 		wikipedia.page(interaction.options.array()[0].value.toString())
 			.then(async (page) => {
 				const summary = (await page.summary()).extract;

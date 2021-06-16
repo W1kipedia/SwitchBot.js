@@ -15,7 +15,7 @@ class ExtendedClient extends Client{
         rob: [],
         sponsor: []
     };
-    public static tempConfig: TempConfig = {
+    public tempConfig: TempConfig = {
         agreedToOpenUrl: false,
         summaryPosition: []
     }

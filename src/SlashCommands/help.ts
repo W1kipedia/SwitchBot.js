@@ -4,7 +4,7 @@ import { readdir } from 'fs/promises';
 import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
-	run: async (interaction) => {
+	run: async (client, interaction) => {
 		async function loopDir(dirname: string): Promise<string> {
 			var final = '';
 			const files = await readdir(dirname);
