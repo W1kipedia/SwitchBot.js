@@ -1,5 +1,7 @@
+import { CommandInteraction } from 'discord.js';
+
 type MessageInfo = {
-	id: number,
+	interaction: CommandInteraction,
 	Position: number,
 	ImageArray: string[]
 }
