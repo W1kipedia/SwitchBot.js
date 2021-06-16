@@ -91,13 +91,15 @@ export const slashCommand: SlashCommand = {
 							{
 								type: 2,
 								style: 1,
-								customID: 'wikipedia_pageBack',
+								label: 'Back',
+								customID: 'wikipedia_imageBack',
 								disabled: true
 							},
 							{
 								type: 2,
 								style: 1,
-								customID: 'wikipedia_pageForward',
+								label: 'Next',
+								customID: 'wikipedia_imageNext',
 								disabled: false
 							}
 							]
