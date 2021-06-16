@@ -10,5 +10,10 @@ export const event: Events = {
 			const { slashCommand } = require(`${path}/${interaction.commandName.toLowerCase()}.ts`);
 			await slashCommand.run(client, interaction);
 		}
+		if (interaction.isButton()) {
+			const path = join(__dirname, '..', 'ButtonEvents');
+			const { Button } = require(`${path}/${interaction.customID}.ts`);
+			await Button.run(client, interaction);
+		}
 	}
 }
