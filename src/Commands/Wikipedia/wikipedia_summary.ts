@@ -44,7 +44,6 @@ export const command: Command = {
 
                 const em = new MessageEmbed({
                     title: page.title,
-                    url: page.fullurl,
                     color: 3066993,
                     footer: {text: `Command by ${msg.author.username}`, iconURL: msg.author.avatarURL()},
                     fields: [
@@ -52,7 +51,22 @@ export const command: Command = {
                     ]
                 });
                 em.setThumbnail('https://media.discordapp.net/attachments/756027330656337951/844262888097185802/1200px-Wikipedia-logo-v2.png');
-                msg.channel.send({embed: em});
+                msg.channel.send({
+                    embed: em,
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 2,
+                                    label: 'View Full Page',
+                                    style: 5,
+                                    url: page.fullurl
+                                }
+                            ]
+                        }
+                    ]
+                });
             })
             .catch(async (err) => {
                 msg.channel.send("Couldn't find the page `" + args.toString().replace(/,/g, ' ') + "`, maybe try searching for it?");
