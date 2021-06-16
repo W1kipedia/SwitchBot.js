@@ -82,26 +82,26 @@ export const slashCommand: SlashCommand = {
 						{
 							type: 1,
 							components: [
-							{
-								type: 2,
-								label: 'View Full Page',
-								style: 5,
-								url: page.fullurl
-							},
-							{
-								type: 2,
-								style: 1,
-								label: 'Back',
-								customID: 'wikipedia_imageBack',
-								disabled: true
-							},
-							{
-								type: 2,
-								style: 1,
-								label: 'Next',
-								customID: 'wikipedia_imageNext',
-								disabled: false
-							}
+								{
+									type: 2,
+									style: 1,
+									label: 'Previous Image',
+									customID: 'wikipedia_imageBack',
+									disabled: true
+								},
+								{
+									type: 2,
+									style: 1,
+									label: 'Next Image',
+									customID: 'wikipedia_imageNext',
+									disabled: false
+								},
+								{
+									type: 2,
+									label: 'View Full Page',
+									style: 5,
+									url: page.fullurl
+								}
 							]
 						}
 					]
