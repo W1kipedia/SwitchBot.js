@@ -11,7 +11,7 @@ export const command: Command = {
         if (!msg.member.roles.cache.has('643128678804619316')) return;
         const message = args.shift().toString().replace(/,/g, ' ');
 
-        msg.channel.delete()
+        msg.delete()
         .then(() => {
             msg.mentions.members.first().send(message)
             .then((messag) => {
