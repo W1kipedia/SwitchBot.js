@@ -55,8 +55,9 @@ export const slashCommand: SlashCommand = {
 					em.setThumbnail(thumbnails[0]);
 				}
 
-				HasWikipeidaLogo ? interaction.reply({
-				// checks if the default wikipedia logo is on the embed
+				if (HasWikipeidaLogo) {
+					// checks if the default wikipedia logo is on the embed
+					interaction.reply({
 					embeds: [em],
 					ephemeral: true,
 					components: [
@@ -73,50 +74,90 @@ export const slashCommand: SlashCommand = {
 						}
 					]
 				})
-				: 
-				//if not then it'll add buttons to the interaction
-				interaction.reply({
-					embeds: [em],
-					ephemeral: true,
-					components: [
-						{
-							type: 1,
-							components: [
-								{
-									type: 2,
-									style: 1,
-									label: 'Previous Image',
-									customID: 'wikipedia_imageBack',
-									disabled: true
-								},
-								{
-									type: 2,
-									style: 1,
-									label: 'Next Image',
-									customID: 'wikipedia_imageNext',
-									disabled: false
-								},
-								{
-									type: 2,
-									label: 'View Full Page',
-									style: 5,
-									url: page.fullurl
-								}
-							]
-						}
-					]
-				})
+				} else {
+					//if not then it'll add buttons to the interaction
+					interaction.reply({
+						embeds: [em],
+						ephemeral: true,
+						components: [
+							{
+								type: 1,
+								components: [
+									{
+										type: 2,
+										style: 1,
+										label: 'Previous Image',
+										customID: 'wikipedia_imageBack',
+										disabled: true
+									},
+									{
+										type: 2,
+										style: 1,
+										label: 'Next Image',
+										customID: 'wikipedia_imageNext',
+										disabled: thumbnails.length === 1 ? true : false
+									},
+									{
+										type: 2,
+										label: 'View Full Page',
+										style: 5,
+										url: page.fullurl
+									}
+								]
+							}
+						]
+					})
 					// then we'll set the tempconfig
 					.then(() => {
-						interaction.fetchReply()
-						.then((msg) => {
-							client.tempConfig.summaryPosition.push({
-								Position: 0,
-								id: parseInt(msg.id),
-								ImageArray: thumbnails
-							})
+						client.tempConfig.summaryPosition.push({
+							Position: 0,
+							embed: em,
+							interaction: interaction,
+							url: page.fullurl,
+							ImageArray: thumbnails,
+							id: interaction.member.user.id
 						})
+						// after 20 seconds both buttons will be disabled
+						setTimeout(() => {
+							interaction.editReply({
+								embeds: [em],
+								components: [
+									{
+										type: 1,
+										components: [
+											{
+												type: 2,
+												style: 1,
+												label: 'Previous Image',
+												customID: 'wikipedia_imageBack',
+												disabled: true
+											},
+											{
+												type: 2,
+												style: 1,
+												label: 'Next Image',
+												customID: 'wikipedia_imageNext',
+												disabled: true
+											},
+											{
+												type: 2,
+												label: 'View Full Page',
+												style: 5,
+												url: page.fullurl
+											}
+										]
+									}
+								]
+							})
+							const location = client.tempConfig.summaryPosition.indexOf({
+								id: interaction.user.id
+							})
+							if (location > -1) {
+								client.tempConfig.summaryPosition.splice(location, 1)
+							}
+						}, 60000)
 					})
+				}
 			})
 			.catch(async (err) => {
 				interaction.reply({content: "Couldn't find the page `" + interaction.options.array()[0].value.toString() + "`, maybe try searching for it?", ephemeral: true});
