@@ -9,10 +9,12 @@ export const command: Command = {
     run: async (client, msg, args) => {
         const choice = [
             'Heads!',
-            'Tails!',
-            'I dropped the coin. Flip the coin again!'
+            'Tails'
         ];
+        const outcome = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, ]
 
-        msg.channel.send(choice[Math.floor(Math.random() * choice.length)])
+        msg.channel.send({
+            content: outcome[Math.floor(Math.random() * outcome.length)] ? choice[Math.floor(Math.random() * choice.length)] : 'WOAH, the coin is balanced between heads and tails'
+        })
     }
 }
