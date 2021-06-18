@@ -92,7 +92,7 @@ export const command: Command = {
                 msg.channel.send("Ah, alright.")
                     .then((messag) => setTimeout(() => messag.delete(), 2000));
             }
-        }).catch((collected: Collection<string, MessageReaction> ) => {
+        }).catch(() => {
             message.delete();
             msg.channel.send("You took too long!")
                 .then((m) => setTimeout(() => m.delete(), 2000));
