@@ -32,7 +32,12 @@ export const command: Command = {
             }
         }
 
-        msg.channel.send(`Text: \`${message}\`\nTranslated: \`${output}\``)
+        msg.channel.send({
+            content: output,
+            reply: {
+                messageReference: msg
+            }
+        })
         .catch((err) => {
             console.error(err);
         });
