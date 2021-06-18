@@ -10,6 +10,7 @@
 <!-- # *Deps*
 * ## ***discordjs/discord.js***
 * ## ***@discordjs/opus@0.5.0***
+* ## ***@discordjs/voice***
 * ## ***@types/mysql***
 * ## ***@types/node***
 * ## ***gtts@0.2.1***
