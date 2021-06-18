@@ -10,7 +10,8 @@ export const slashCommand: SlashCommand = {
 			const files = await readdir(dirname);
 				files.forEach((file) => {
 					if (file.endsWith('.ts') && !(file.endsWith('.d.ts'))) {
-						final += `\`${file.replace('.ts', '')}\`, `
+						const { command } = require(`${dirname}/${file}`)
+						final += command.public ? `\`${file.replace('.ts', '')}\`, ` : ''
 					}
 				});
 			return final.substring(0, final.length - 2);
