@@ -4,3 +4,4 @@ retrieve.ts
 package-lock.json
 node_modules
 version markdowns
+logs

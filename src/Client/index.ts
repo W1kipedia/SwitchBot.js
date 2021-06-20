@@ -1,6 +1,7 @@
 import { Client, Collection, User } from 'discord.js';
 import path from 'path';
 import { readdirSync } from 'fs';
+import { appendFile, access, mkdir} from 'fs/promises';
 import { Command, Events, Config, TempConfig } from '../Interfaces';
 import { createConnection } from "mysql";
 import ConfigJson from '../../data/config.json';
@@ -68,7 +69,7 @@ class ExtendedClient extends Client{
             });
         });
     }
-    public async update_bank(user_id:string|number, change:number, mode?: 'bank'|'wallet') {
+    public async update_bank(user_id:string|number, change:number, mode?: 'bank'|'wallet'): Promise<void> {
         if (typeof mode === 'undefined'|| mode === null) mode = 'wallet';
         const con = createConnection(this.config.dbEconomy);
 
@@ -80,6 +81,39 @@ class ExtendedClient extends Client{
                 con.destroy();
             });
         });
+    }
+
+    private async FileExists(fileName: string): Promise<boolean> {
+        try {
+            await access(fileName);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    private async CreateLogFile(): Promise<void> {
+        const d = new Date();
+        const LogDir = path.join(__dirname, '..', '..', 'logs', `${d.getFullYear()}`, `${d.getMonth()}`)
+        this.FileExists(LogDir)
+            .then(async (result) => {
+                if (!result) {
+                    await mkdir(LogDir, {recursive: true})
+                }
+                await appendFile(`${LogDir}/${d.getDate()}.txt`, '', {encoding: 'utf8'});
+            })
+    }
+
+    public async UpdateLog(Log: string): Promise<void> {
+        const d = new Date();
+        const logFile = path.join(__dirname, '..', '..', 'logs', `${d.getFullYear()}`, `${d.getMonth()}`);
+        this.FileExists(`${logFile}/${d.getDate()}.txt`)
+            .then(async (result) => {
+                if (!result) {
+                    await this.CreateLogFile();
+                }
+                await appendFile(`${logFile}/${d.getDate()}.txt`, `${Log}\n`, {encoding: 'utf8'});
+            })
     }
 }
 
