@@ -7,6 +7,15 @@ export const command: Command = {
 	example: 's.youtube',
 	description: 'A link to the Switch n Snap youtube channel!',
 	run: async (client, msg, args) => {
-		msg.channel.send('https://youtube.com/channel/UCsm0frad-zaZiSeGuuHgepQ')
+		msg.delete()
+		.then(() => {
+			msg.channel.send({
+				content: 'https://youtube.com/channel/UCsm0frad-zaZiSeGuuHgepQ'
+			})
+			.then(m => {
+				setTimeout(() => m.delete(), 60000)
+			})
+		})
+		.catch(err => console.error(err));
 	}
 }
