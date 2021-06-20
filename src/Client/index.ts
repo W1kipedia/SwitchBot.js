@@ -1,7 +1,7 @@
 import { Client, Collection, User } from 'discord.js';
 import path from 'path';
-import { readdirSync } from 'fs';
-import { appendFile, access, mkdir} from 'fs/promises';
+import { readdirSync, appendFile } from 'fs';
+import { access, mkdir} from 'fs/promises';
 import { Command, Events, Config, TempConfig } from '../Interfaces';
 import { createConnection } from "mysql";
 import ConfigJson from '../../data/config.json';
@@ -92,15 +92,14 @@ class ExtendedClient extends Client{
         }
     }
 
-    private async CreateLogFile(): Promise<void> {
+    private CreateLogDir(): void {
         const d = new Date();
         const LogDir = path.join(__dirname, '..', '..', 'logs', `${d.getFullYear()}`, `${d.getMonth()}`)
         this.FileExists(LogDir)
-            .then(async (result) => {
+            .then((result) => {
                 if (!result) {
-                    await mkdir(LogDir, {recursive: true})
+                    mkdir(LogDir, {recursive: true})
                 }
-                await appendFile(`${LogDir}/${d.getDate()}.txt`, '', {encoding: 'utf8'});
             })
     }
 
@@ -108,11 +107,14 @@ class ExtendedClient extends Client{
         const d = new Date();
         const logFile = path.join(__dirname, '..', '..', 'logs', `${d.getFullYear()}`, `${d.getMonth()}`);
         this.FileExists(`${logFile}/${d.getDate()}.txt`)
-            .then(async (result) => {
+            .then((result) => {
                 if (!result) {
-                    await this.CreateLogFile();
+                    this.CreateLogDir();
+                    appendFile(`${logFile}/${d.getDate()}.txt`, '', () => console.log("created a new log for the day"));
                 }
-                await appendFile(`${logFile}/${d.getDate()}.txt`, `${Log}\n`, {encoding: 'utf8'});
+                setTimeout(() => {
+                    appendFile(`${logFile}/${d.getDate()}.txt`, `${Log}\n`, () => {});
+                }, 600)
             })
     }
 }
