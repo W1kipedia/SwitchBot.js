@@ -42,6 +42,7 @@ export const command: Command = {
             const reaction = collected.first();
 
             if (reaction.emoji.name === '👍') {
+                msg.delete();
                 message.delete();
                     
                 const db = createConnection(client.config.dbAll);
@@ -51,35 +52,23 @@ export const command: Command = {
 
                     const q = `SELECT has_custom_role, custom_role_id FROM Boosters WHERE client_id = '${member.id}'`;
 
-                    console.log(q);
                         db.query(q, (err, result:any[]) => {
                             if (err) throw err;
 
-                            console.log(result.length);
-                            console.log(result);
-
                             if (result.length === 1) {
-                                console.log("entered if statement");
                                 if (result[0].has_custom_role) {
 
-                                    console.log("entered second if statement");
-
                                     const id: string = result[0].custom_role_id.toString();
-
                                     
                                     member.roles.cache.forEach((role) => {
-                                        console.log(`${role.id} ${id} ${role.id === id}`)
                                         if (role.id === id) {
-                                            console.log("just made it to the ForEach loop")
                                             member.roles.remove(role);
                                         }
                                     });
-                                    console.log("done!");
                                 }
                             };
 
                         });
-                    console.log("alright destorying the cursor ig");
                     db.end();
                 });
 

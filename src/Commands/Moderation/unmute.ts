@@ -42,6 +42,7 @@ export const command: Command = {
                 const reaction = collected.first();
 
                 if (reaction.emoji.name === '👍') {
+                    msg.delete();
                     message.delete();
 
                     const db = createConnection(client.config.dbAll);
