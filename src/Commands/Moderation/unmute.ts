@@ -58,7 +58,6 @@ export const command: Command = {
                             if (result.length === 1) {
                                 if (result[0].has_custom_role) {
                                     const customRole = await msg.guild.roles.fetch(result[0].custom_role_id)
-                                    console.log("added custom role")
                                     member.roles.add(customRole);
                                 }
                             };

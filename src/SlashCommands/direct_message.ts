@@ -9,7 +9,7 @@ export const slashCommand: SlashCommand = {
 				content: `A moderator from Switch n' Snap decided to anonymously dm you \`${interaction.options.array()[1].value.toString()}\``
 			})
 			.then(msg => {
-				console.log(`${interaction.user.tag} sent ${interaction.options.array()[0].user.tag} "${interaction.options.array()[1].value.toString()}"`);
+				client.UpdateLog(`${interaction.user.tag} sent ${interaction.options.array()[0].user.tag} "${interaction.options.array()[1].value.toString()}"`);
 				interaction.reply({
 					content: "✅Succesfully sent!",
 					ephemeral: true
