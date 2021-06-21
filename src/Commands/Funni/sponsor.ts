@@ -9,11 +9,14 @@ export const command: Command = {
 	aliases: ['Sponser'],
 	example: 's.sponsor',
 	run: async (client, msg, args) => {
+		var denied = false;
 		client.cooldowns.sponsor.forEach((id:string) => {
 			if (id === msg.author.id) {
 				msg.channel.send(`You're still on cooldown for ${(client.cooldowns.open_url[msg.author.id.toString()]) / (1000 * 60)} minutes!`)
+				denied = true;
 			}
 		})
+		if (denied) return;
 
 		const Sponsorpath = join(__dirname, '..', '..', '..', 'sponsors')
 		readdir(Sponsorpath)

@@ -9,14 +9,16 @@ export const command: Command = {
     public: true,
     aliases: [],
     run: async (client, msg, args) => {
+        var denied = false;
         client.cooldowns.rob.forEach((robber) => {
             if (robber = msg.author.id) {
                 msg.channel.send("You currently cannot rob anyone right now...")
                     .catch(err => console.error(err));
-                return;
+                denied = true;
             }
         });
 
+        if (denied) return;
         if (args.length === 0) return;
         const victim: GuildMember = msg.mentions.members.first();
         if (typeof victim === 'undefined'){msg.channel.send('You must mention someone to rob 😐').catch((err) => console.error(err)); return;}

@@ -10,11 +10,15 @@ export const command: Command = {
     run: async (client, msg, args) => {
         if (args.length === 0||args.length > 1) return;
         if (!client.tempConfig.agreedToOpenUrl) {msg.channel.send("The owner has opted out of this option!"); return;}
+
+        var denied = false;
         client.cooldowns.open_url.forEach((id:string) => {
             if (id === msg.author.id) {
                 msg.channel.send(`You're still on cooldown for ${(client.cooldowns.open_url[msg.author.id.toString()]) / (1000*60)} minutes!`)
+                denied = true;
             }
         })
+        if (denied) return;
 
         const prompt = args.toString().replace(/,/g, ' ');
 
