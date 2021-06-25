@@ -5,7 +5,7 @@
 
 ![Switch N' Snap Banner](https://user-images.githubusercontent.com/13318752/108582227-6d3af100-72f7-11eb-8670-e7514d4d0d17.png)
 
-## ***You can set it up yourself by using `npm i` or `yarn add`***
+## ***You can set it up yourself by using `npm i` or `yarn install`***
 
 <!-- # *Deps*
 * ## ***discordjs/discord.js***
