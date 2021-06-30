@@ -1,3 +1,9 @@
+<p align="center">
+	<a href="https://discord.gg/CNBE4hPf3y">
+		<img alt="Discord" src="https://img.shields.io/discord/643082091961122816?label=Discord%20Server&logo=discord">
+	</a>
+</p>
+
 # **Switch Bot.Js**
 <br></br>
 <br></br>
