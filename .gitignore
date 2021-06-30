@@ -2,6 +2,7 @@ data
 **.test.ts
 package-lock.json
 node_modules
+yarn.lock
 ### 
 # This is just a folder dedicated to keeping every versions markdown from releases in here, don't worry about having it or not #
 version markdowns
