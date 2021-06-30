@@ -17,7 +17,6 @@
     "gtts": "^0.2.1",
     "mysql": "^2.18.1",
     "open": "^8.2.0",
-    "sodium": "^3.0.2",
     "wikipedia": "^1.1.1"
   },
   "devDependencies": {
