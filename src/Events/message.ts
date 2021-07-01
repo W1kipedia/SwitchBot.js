@@ -33,14 +33,14 @@ export const event: Events = {
             var no: GuildEmoji | string = '👎';
             var think: GuildEmoji | string = '🤔';
             msg.guild.emojis.cache.forEach((emote) => {
-                switch (emote.id) {
-                    case '849525435066482720':
+                switch (emote.name) {
+                    case 'yes':
                         yes = emote;
                         break;
-                    case '849525435066482720':
+                    case 'no':
                         no = emote;
                         break;
-                    case '849525435066482720':
+                    case 'thronking':
                         think = emote;
                         break;
                 }
