@@ -9,8 +9,7 @@ export const command: Command = {
     public: true,
     "aliases": [],
     run: async (client, msg, args) => {
-        if (args.length <= 0) return;
-        if (args.length === 1) return;
+        if (args.length <= 1) return;
 
         client.OpenAccount(msg.author.id);
 
