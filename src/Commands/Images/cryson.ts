@@ -11,6 +11,6 @@ export const command: Command = {
         e.setFooter(`Command used by ${msg.author.username}`, msg.author.avatarURL());
         e.setImage('https://media1.tenor.com/images/61e127273f4ce7c6cefcdfa07183f0a0/tenor.gif');
 
-        msg.channel.send({ embed: e })
+        msg.channel.send({ embeds: [e]})
     }
 }
