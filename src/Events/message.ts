@@ -8,6 +8,14 @@ export const event: Events = {
     run: async (client, msg: Message) => {
         if (!msg.guild) return; 
         if (msg.author.bot) return;
+        if (msg.content.toLowerCase() === 'avocados 🥑 from mexico 🇲🇽') {
+            msg.react('🥑')
+            .then(() => {
+                msg.react('🇲🇽')
+                .catch(err => console.error(err));
+            })
+            .catch(err => console.error(err));
+        }
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
         msg.content.split(' ').forEach((word) => {
             // inside of /data/profanity.txt you list a word to be censored by creating a word per line
