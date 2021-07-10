@@ -22,16 +22,14 @@ export const event: Events = {
             const FilePath = path.join(__dirname, '..', '..', 'data');
             readFile(`${FilePath}/profanity.txt`, 'utf8')
                 .then((data) => {
-                    data.split('\n').forEach((word) => {
-                        const re = new RegExp(word, 'g');
+                    data.split('\n').forEach((CensoredWord) => {
+                        const re = new RegExp(CensoredWord, 'g');
                         
-                        msg.content.split(' ').forEach((w) => {
-                            if (re.test(w.toLowerCase())) {
-                                msg.delete()
-                                    .catch(err => console.error(err))
-                                return;
-                            }
-                        })
+                        if (re.test(word.toLowerCase())) {
+                            msg.delete()
+                                .catch(err => console.error(err))
+                            return;
+                        }
                     });
                 })
                 .catch(err => console.error(err));
@@ -123,7 +121,7 @@ export const event: Events = {
             .trim()
             .split(/ +/g);
 
-        const cmd = args.shift().toLocaleLowerCase();
+        const cmd = args.shift().toLowerCase();
         if(!cmd) return;
         const command = client.commands.get(cmd) || client.aliases.get(cmd);
         if (command) (command as Command).run(client, msg, args);
