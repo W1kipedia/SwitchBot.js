@@ -81,26 +81,26 @@ export const slashCommand: SlashCommand = {
 						ephemeral: true,
 						components: [
 							{
-								type: 1,
+								type: "ACTION_ROW",
 								components: [
 									{
-										type: 2,
-										style: 1,
+										type: "BUTTON",
+										style: "PRIMARY",
 										label: 'Previous Image',
-										customID: 'wikipedia_imageBack',
+										customId: 'wikipedia_imageBack',
 										disabled: true
 									},
 									{
-										type: 2,
-										style: 1,
+										type: "BUTTON",
+										style: "PRIMARY",
 										label: 'Next Image',
-										customID: 'wikipedia_imageNext',
+										customId: 'wikipedia_imageNext',
 										disabled: thumbnails.length === 1 ? true : false
 									},
 									{
-										type: 2,
+										type: "BUTTON",
 										label: 'View Full Page',
-										style: 5,
+										style: "LINK",
 										url: page.fullurl
 									}
 								]
@@ -123,26 +123,26 @@ export const slashCommand: SlashCommand = {
 								embeds: [em],
 								components: [
 									{
-										type: 1,
+										type: "ACTION_ROW",
 										components: [
 											{
-												type: 2,
-												style: 1,
+												type: "BUTTON",
+												style: "PRIMARY",
 												label: 'Previous Image',
-												customID: 'wikipedia_imageBack',
+												customId: 'wikipedia_imageBack',
 												disabled: true
 											},
 											{
-												type: 2,
-												style: 1,
+												type: "BUTTON",
+												style: "PRIMARY",
 												label: 'Next Image',
-												customID: 'wikipedia_imageNext',
+												customId: 'wikipedia_imageNext',
 												disabled: true
 											},
 											{
-												type: 2,
+												type: "BUTTON",
 												label: 'View Full Page',
-												style: 5,
+												style: "LINK",
 												url: page.fullurl
 											}
 										]

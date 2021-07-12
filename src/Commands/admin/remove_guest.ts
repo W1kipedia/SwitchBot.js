@@ -13,6 +13,7 @@ export const command: Command = {
             msg.guild.members.cache.forEach((member) => {
                 if (member.id === data) {
                     const guest = member;
+                    // @ts-ignore
                     guest.roles.remove(data);
                     msg.channel.send(`${guest.user.username} is no longer a guest`)
                     .catch(err => {

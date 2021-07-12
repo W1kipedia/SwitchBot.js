@@ -11,7 +11,7 @@ export const event: Events = {
             if (emoji.name.toLowerCase() === 'kirby') kirby = emoji;
         });
 
-        member.guild.channels.cache.filter(c => c.type === 'text')
+        member.guild.channels.cache.filter(c => c.type === 'GUILD_TEXT')
         .forEach((channel:TextChannel) => {
             if (channel.id === '693680984306221126') {
                 const choices = [

@@ -12,7 +12,7 @@ export const event: Events = {
 		}
 		if (interaction.isButton()) {
 			const path = join(__dirname, '..', 'ButtonEvents');
-			const { Button } = require(`${path}/${interaction.customID}.ts`);
+			const { Button } = require(`${path}/${interaction.customId}.ts`);
 			await Button.run(client, interaction);
 		}
 	}

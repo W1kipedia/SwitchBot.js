@@ -14,7 +14,7 @@ export const command: Command = {
         
         if (msg.guild.members.cache.get(msg.author.id).permissions.has('MANAGE_MESSAGES')) {
 
-            if (msg.channel.type === 'text') {
+            if (msg.channel.type === 'GUILD_TEXT') {
                 const channel = msg.channel;
                 channel.bulkDelete(amount)
                     .catch(err => {

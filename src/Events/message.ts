@@ -89,6 +89,7 @@ export const event: Events = {
                                 .catch((err) => {
                                     console.error(err);
                                 })
+                            // @ts-ignore
                             member.roles.remove(client.config.id.guestRole.toString())
                                 .then(() => {
                                     console.log(`${member.user.username} is no longer a guest`);
