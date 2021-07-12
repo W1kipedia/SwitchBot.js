@@ -31,10 +31,6 @@ export const command: Command = {
                     value: `${await loopDir(join(__dirname, '..', 'Funni'))}`
                 },
                 {
-                    name: '**Gambling**',
-                    value: `${await loopDir(join(__dirname, '..', 'Gambling'))}`
-                },
-                {
                     name: '**Images**',
                     value: `${await loopDir(join(__dirname, '..', 'Images'))}`
                 },
