@@ -4,7 +4,7 @@ import path from 'path';
 import { readFile, unlink } from 'fs/promises';
 
 export const event: Events = {
-    name: 'message',
+    name: 'messageCreate',
     run: async (client, msg: Message) => {
         if (!msg.guild) return; 
         if (msg.author.bot) return;
