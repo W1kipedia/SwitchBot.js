@@ -11,9 +11,6 @@ class ExtendedClient extends Client{
     public events: Collection<string, Events> = new Collection();
     public cooldowns = {
         open_url: [],
-        beg: [],
-        gambleflip: [],
-        rob: [],
         sponsor: []
     };
     public tempConfig: TempConfig = {
@@ -53,34 +50,6 @@ class ExtendedClient extends Client{
             this.on(event.name, event.run.bind(null, this))
         });
 
-    }
-    public OpenAccount(user_id:string|number): void {
-        const amogus = createConnection(this.config.dbEconomy);
-
-        amogus.connect((err) => {
-            if (err) throw err;
-            const sql = `SELECT client_id FROM Economy WHERE client_id = '${user_id}'`;
-            amogus.query(sql, (err, result: any[]) => {
-                if (err) throw err;
-                if (result.length === 0) {
-                    const queue = `INSERT INTO Economy VALUES ('${user_id}', 69, 420)`;
-                    amogus.query(queue, (problem, yeet) => {if (problem) throw problem;console.log(yeet)});
-                }
-            });
-        });
-    }
-    public async update_bank(user_id:string|number, change:number, mode?: 'bank'|'wallet'): Promise<void> {
-        if (typeof mode === 'undefined'|| mode === null) mode = 'wallet';
-        const con = createConnection(this.config.dbEconomy);
-
-        con.connect((f) => {
-            if (f) throw f;
-            const sql = `UPDATE Economy SET ${mode} = ${mode} + ${change} WHERE client_id = '${user_id}'`;
-            con.query(sql, (err, result) => {
-                if (err) throw err;
-                con.destroy();
-            });
-        });
     }
 
     private async FileExists(fileName: string): Promise<boolean> {
