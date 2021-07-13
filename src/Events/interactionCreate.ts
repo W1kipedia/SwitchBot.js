@@ -3,7 +3,7 @@ import { join } from 'path';
 import { Events } from '../Interfaces';
 
 export const event: Events = {
-	name: 'interaction',
+	name: 'interactionCreate',
 	run: async (client, interaction:Interaction) => {
 		if (interaction.isCommand()) {
 			const path = join(__dirname, '..', 'SlashCommands');
