@@ -26,10 +26,6 @@ export const slashCommand: SlashCommand = {
 					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Funni'))}`
 				},
 				{
-					name: '**Gambling**',
-					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Gambling'))}`
-				},
-				{
 					name: '**Images**',
 					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Images'))}`
 				},
