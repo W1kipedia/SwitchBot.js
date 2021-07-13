@@ -12,26 +12,26 @@ export const Button: Buttons = {
 					embeds: [result.embed],
 					components: [
 						{
-							type: 1,
+							type: "ACTION_ROW",
 							components: [
 								{
-									type: 2,
-									style: 1,
+									type: "BUTTON",
+									style: "PRIMARY",
 									label: 'Previous Image',
-									customID: 'wikipedia_imageBack',
+									customId: 'wikipedia_imageBack',
 									disabled: false
 								},
 								{
-									type: 2,
-									style: 1,
+									type: "BUTTON",
+									style: "PRIMARY",
 									label: 'Next Image',
-									customID: 'wikipedia_imageNext',
+									customId: 'wikipedia_imageNext',
 									disabled: result.Position === result.ImageArray.length ? true : false
 								},
 								{
-									type: 2,
+									type: "BUTTON",
 									label: 'View Full Page',
-									style: 5,
+									style: "LINK",
 									url: result.url
 								}
 							]
