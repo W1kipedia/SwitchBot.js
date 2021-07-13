@@ -22,10 +22,6 @@ export const slashCommand: SlashCommand = {
 			color: 3447003,
 			fields: [
 				{
-					name: '**Economy**',
-					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Economy'))}`
-				},
-				{
 					name: '**Funni**',
 					value: `${await loopDir(join(__dirname, '..', 'Commands', 'Funni'))}`
 				},
