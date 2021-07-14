@@ -6,7 +6,6 @@ export const Button: Buttons = {
 			if (result.id === button.user.id) {
 				result.Position -= 1;
 				result.embed.setThumbnail(result.ImageArray[result.Position])
-				console.log(result.ImageArray);
 				result.interaction.editReply({
 					content: "Don't worry if you get a \"This interaction failed\" warning when using buttons, it's normal",
 					embeds: [result.embed],
