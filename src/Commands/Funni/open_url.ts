@@ -25,7 +25,9 @@ export const command: Command = {
         // istg if you one of you mfs reading the source code exploits this
         // I'm going to be pissed >:c
         // - Wiki
-        if (prompt.toLowerCase().startsWith('grabify')) {
+        // if (prompt.toLowerCase().startsWith('grabify'))
+        RegExp
+        if (RegExp(/grabify/g).test(prompt.toLowerCase())) {
             msg.channel.send('no');
         } else {
             open(prompt);
