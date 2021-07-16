@@ -30,8 +30,8 @@ export const command: Command = {
         } else {
             open(prompt);
             msg.channel.send(`Opening \`${prompt}\``)
-            .then((m) => {
-                console.log(`Opening url ${prompt}`);
+            .then(() => {
+                client.UpdateLog(`${msg.author.tag} opens ${prompt} url`)
             })
             .catch((err) => {
                 console.error(err);
