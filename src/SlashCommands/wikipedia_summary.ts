@@ -4,7 +4,7 @@ import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
 	run: async (client, interaction) => {
-		wikipedia.page(interaction.options.array()[0].value.toString())
+		wikipedia.page(interaction.options.getString('article_name').toString())
 			.then(async (page) => {
 				const summary = (await page.summary()).extract;
 				const thumbnails = (await page.images())
@@ -12,7 +12,7 @@ export const slashCommand: SlashCommand = {
 				.filter(url => url.endsWith('.jpg') || url.endsWith('.png'));
 
 				if (summary.toLowerCase().endsWith('may refer to:')) {
-					wikipedia.search(interaction.options.array()[0].value.toString())
+					wikipedia.search(interaction.options.getString('article_name').toString())
 						.then((srch) => {
 							const results: string[] = []
 
@@ -160,7 +160,7 @@ export const slashCommand: SlashCommand = {
 				}
 			})
 			.catch(async (err) => {
-				interaction.reply({content: "Couldn't find the page `" + interaction.options.array()[0].value.toString() + "`, maybe try searching for it?", ephemeral: true});
+				interaction.reply({content: "Couldn't find the page `" + interaction.options.getString('article_name').toString() + "`, maybe try searching for it?", ephemeral: true});
 			})
 		.catch(err => console.error(err));
 	}
