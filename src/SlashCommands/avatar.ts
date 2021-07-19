@@ -3,7 +3,7 @@ import { SlashCommand } from '../Interfaces';
 
 export const slashCommand: SlashCommand = {
 	run: async (client, interaction) => {
-		if (!(interaction.options.array().toString())) {
+		if (!(interaction.options.getUser('user'))) {
 			const em = new MessageEmbed({
 				title: 'Avatar',
 				color: 0
@@ -19,8 +19,8 @@ export const slashCommand: SlashCommand = {
 				title: 'Avatar',
 				color: 0
 			});
-			em.setImage(interaction.options.array()[0].user.avatarURL({dynamic: true, format: 'png', size: 256}));
-			em.setAuthor(interaction.options.array()[0].user.tag, interaction.options.array()[0].user.avatarURL())
+			em.setImage(interaction.options.getUser('user').avatarURL({dynamic: true, format: 'png', size: 256}));
+			em.setAuthor(interaction.options.getUser('user').tag, interaction.options.getUser('user').avatarURL())
 			interaction.reply({
 				embeds: [em],
 				ephemeral: true
