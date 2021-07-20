@@ -4,7 +4,7 @@ const e = new Client({
     intents: [
         'GUILDS',
         'GUILD_PRESENCES',
-        'GUILD_EMOJIS',
+        'GUILD_EMOJIS_AND_STICKERS',
         'GUILD_BANS',
         'GUILD_MEMBERS',
         'GUILD_MESSAGE_REACTIONS',
