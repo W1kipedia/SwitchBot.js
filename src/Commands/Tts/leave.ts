@@ -1,4 +1,4 @@
-import { Emoji } from 'discord.js';
+import { getVoiceConnection } from '@discordjs/voice'
 import { Command } from '../../Interfaces';
 
 export const command: Command = {
@@ -8,32 +8,14 @@ export const command: Command = {
     public: true,
     aliases: ['die', 'goaway', 'go_away', 'death'],
     run: async (client, msg, args) => {
-
-        msg.channel.send("Currently not available due to discord.js v13 not being finished :c")
-
-        // if (!msg.member.voice.channel) {
-        //     client.voice.connections.array().
-        //         forEach(async (channel) => {
-        //             if (channel.channel.guild.id === msg.guild.id) {
-        //                 if (channel.channel.members.array().length >= 0) {
-        //                     channel.disconnect();
-        //                 }
-        //             }
-        //         });
-        // } else {
-        //     client.voice.connections.array().
-        //         forEach(async (channel) => {
-        //             if (channel.channel.guild.id === msg.guild.id) {
-        //                 if (channel.channel.members.array().length >= 0||
-        //                 channel.channel.members.has(msg.author.id)) {
-        //                     channel.disconnect();
-        //                     msg.react('👋')
-        //                     .catch((err) => {
-        //                         console.log(err);
-        //                     })
-        //                 }
-        //             }
-        //         });
-        // }
+        try {
+            getVoiceConnection(msg.guild.id).destroy();
+            msg.react('👋')
+                .catch((err) => {
+                    console.log(err);
+                })
+        } catch {
+            msg.channel.send("had an error while trying to get the channel. Try using `s.join` and then use this command again?");
+        }
     }
 }
