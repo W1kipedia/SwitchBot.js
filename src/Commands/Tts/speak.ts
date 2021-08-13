@@ -1,6 +1,6 @@
 import { Command } from '../../Interfaces';
-const gTTS = require('gtts');
-import { createReadStream } from 'fs';
+import gTTS from 'gtts';
+import { joinVoiceChannel, createAudioPlayer, getVoiceConnection, NoSubscriberBehavior, createAudioResource, AudioPlayerStatus } from '@discordjs/voice'
 
 export const command: Command = {
     name: 'speak',
@@ -9,59 +9,67 @@ export const command: Command = {
     public: true,
     aliases: [],
     run: async (client, msg, args) => {
+        if (!msg.member.voice.channel) {msg.channel.send("you're not even in a channel lmao");return;}
 
-        msg.channel.send("currently not available because discord.js v13 isn't finished :c");
+        async function playAudio(quick?: boolean) {
+            var conn = getVoiceConnection(msg.guild.id);
+            const player = createAudioPlayer({
+                behaviors: {
+                    noSubscriber: NoSubscriberBehavior.Pause
+                }
+            })
 
-        // if (!msg.member.voice.channel) {msg.channel.send("you're not even in a channel lmao");return;}
-
-        // async function playAudio(quick?: boolean) {
-        //     var conn: VoiceConnection = undefined;
-        //     client.voice.connections.forEach((connection) => {
-        //         if (connection.channel.id === msg.guild.member(client.user).voice.channel.id) {
-        //             conn = connection;
-        //         }
-        //     });
-
-        //     const tts = new gTTS(args.toString().replace(/,/g, ' '), 'en');
-        //     tts.save('/tmp/audio.ogg', () => {
-        //         // I prefer to save it in my temp folder but you
-        //         // can choose whatever folder you want
-        //         // example vvv
-        //         // tts.save('../../../data/audio.mp3');
+            const tts = new gTTS(args.toString().replace(/,/g, ' '), 'en');
+            tts.save('/tmp/audio.ogg', () => {
+                // I prefer to save it in my temp folder but you
+                // can choose whatever folder you want
+                // example vvv
+                // tts.save('../../../data/audio.mp3');
                 
-        //         // const dispatcher = conn.play('/tmp/audio.ogg', {volume: 1, bitrate: 'auto', type: 'ogg/opus', seek: 0});
-        //         const dispatcher = conn.play(createReadStream('/tmp/audio.ogg'));
-        //         // const dispatcher = conn.play('../../../data/audio.mp3');
+                // const resource = createAudioResource(createReadStream('/tmp/audio.ogg'));
+                const resource = createAudioResource('/tmp/audio.ogg')
+                player.play(resource);
+                conn.subscribe(player);
 
-        //         dispatcher.on('finish', () => {
-        //             if (quick) conn.disconnect();
-        //         })
+                player.on(AudioPlayerStatus.Idle, () => {
+                    if (quick) conn.destroy();
+                })
                 
-        //         dispatcher.on('error', (err) => {
-        //             msg.channel.send(`There was an error while trying to play audio!\nError: ${err}`);
-        //             console.error(err);
-        //         });
-        //     });
-        // }
+                player.on('error', (err) => {
+                    msg.channel.send(`There was an error while trying to play audio!\nError: ${err}`);
+                    console.error(err);
+                });
+            });
+        }
 
-        // if (msg.guild.member(client.user).voice.channel ) {
-        //     if (msg.guild.member(client.user).voice.channel.id === msg.member.voice.channel.id)  await playAudio();
-        //     else {
-        //         var memberCount: number = msg.guild.member(client.user).voice.channel.members.array().length;
+        if (msg.guild.members.cache.get(client.user.id).voice.channel) {
+            if (msg.guild.members.cache.get(client.user.id).voice.channel.id === msg.member.voice.channel.id)  await playAudio();
+            else {
+                var memberCount: number = msg.guild.members.cache.get(client.user.id).voice.channel.members.size;
 
-        //         msg.guild.member(client.user).voice.channel.members.
-        //         forEach((member) => {
-        //             if (member.user.bot) memberCount = memberCount - 1; 
-        //         })
-        //         if (memberCount === 0) { msg.guild.member(client.user).voice.channel.leave();
-        //              msg.member.voice.channel.join().then(async () => {await playAudio();})}
-        //     }
-
-        // } else if (!msg.guild.member(client.user).voice.channel) {
-        //     if (msg.member.voice.channel) {
-        //         msg.member.voice.channel.join()
-        //         .then(() => {playAudio(true);})
-        //     };
-        // } else return;
+                msg.guild.members.cache.get(client.user.id).voice.channel.members.
+                forEach((member) => {
+                    if (member.user.bot) memberCount = memberCount - 1; 
+                })
+                if (memberCount === 0) { 
+                    getVoiceConnection(msg.guild.id).destroy();
+                    joinVoiceChannel({
+                        channelId: msg.member.voice.channel.id,
+                        guildId: msg.guild.id,
+                        adapterCreator: msg.guild.voiceAdapterCreator
+                    })
+                    await playAudio();
+                }
+            }
+        } else (!msg.guild.members.cache.get(client.user.id).voice.channel) ;{
+            if (msg.member.voice.channel) {
+                joinVoiceChannel({
+                    channelId: msg.member.voice.channel.id,
+                    guildId: msg.guild.id,
+                    adapterCreator: msg.guild.voiceAdapterCreator
+                });
+                await playAudio(true);
+            }
+        }
     }
 }
