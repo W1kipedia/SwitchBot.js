@@ -6,7 +6,7 @@ type MessageInfo = {
 	Position?: number,
 	ImageArray?: string[],
 	url?: string,
-	id: `${bigint}`
+	id: string
 }
 
 export interface TempConfig {
