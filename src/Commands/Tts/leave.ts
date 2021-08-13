@@ -15,7 +15,10 @@ export const command: Command = {
                     console.log(err);
                 })
         } catch {
-            msg.channel.send("had an error while trying to get the channel. Try using `s.join` and then use this command again?");
+            msg.channel.send("had an error while trying to get the channel. Try using `s.join` and then use this command again?")
+            .then((msg_) => {
+                setTimeout(() => msg_.delete(), 5000);
+            });
         }
     }
 }
