@@ -8,7 +8,6 @@ export const Button: Buttons = {
 				result.embed.setThumbnail(result.ImageArray[result.Position])
 				await button.deferUpdate();
 				result.interaction.editReply({
-					content: "Don't worry if you get a \"This interaction failed\" warning when using buttons, it's normal",
 					embeds: [result.embed],
 					components: [
 						{
