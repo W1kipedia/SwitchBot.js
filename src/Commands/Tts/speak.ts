@@ -68,7 +68,7 @@ export const command: Command = {
                     guildId: msg.guild.id,
                     adapterCreator: msg.guild.voiceAdapterCreator
                 });
-                await playAudio(true);
+                await playAudio();
             }
         }
     }
