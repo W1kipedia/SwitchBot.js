@@ -4,7 +4,7 @@ export const command: Command = {
     name: 'coinflip',
     public: true,
     description: 'Flip a coin!',
-    aliases: [],
+    aliases: ['cf'],
     example: 's.coinflip',
     run: async (client, msg, args) => {
         const choice = [
