@@ -51,7 +51,7 @@ export const event: Events = {
                         break;
                 }
             });
-            if (msg.author.id === '547971853990494208') {
+            if (msg.author.id === client.config.id.owner.toString()) {
                 msg.react(yes)
                     .then(() => {
                         msg.react(no)
@@ -71,34 +71,31 @@ export const event: Events = {
             } else {
                 readFile('/tmp/guest.txt', {encoding: 'utf-8'})
                 .then((data) => {
-                    msg.guild.members.cache.forEach((member) => {
-                        if (member.id === data) {
-                            msg.react(yes)
-                                .then(() => {
-                                    msg.react(no)
-                                        .then(() => {
-                                            msg.react(think)
-                                                .catch((err) => {
-                                                    console.error(err);
-                                                })
-                                        })
-                                        .catch((err) => {
-                                            console.error(err);
-                                        })
-                                })
-                                .catch((err) => {
-                                    console.error(err);
-                                })
-                            // @ts-ignore
-                            member.roles.remove(client.config.id.guestRole.toString())
-                                .then(() => {
-                                    console.log(`${member.user.username} is no longer a guest`);
-                                })
-                                .catch((err) => {
-                                    console.error(err);
-                                });
-                        }
-                    })
+                    if (msg.author.id === data) {
+                        msg.react(yes)
+                            .then(() => {
+                                msg.react(no)
+                                    .then(() => {
+                                        msg.react(think)
+                                            .catch((err) => {
+                                                console.error(err);
+                                            })
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                    })
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                            })
+                        msg.member.roles.remove(client.config.id.guestRole.toString())
+                            .then(() => {
+                                console.log(`${msg.author.username} is no longer a guest`);
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                            });
+                    }
                 })
                 .then(() => {
                     unlink('/tmp/guest.txt')
