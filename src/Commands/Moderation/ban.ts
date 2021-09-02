@@ -11,12 +11,16 @@ export const command: Command = {
         if (args.length === 0) return;
         if (!msg.member.permissions.has('BAN_MEMBERS')) return;
 
-        if (msg.mentions.members.first().user === client.user) {
-            msg.channel.send("no")
-                .catch(err => console.error(err));
-            return;
+        try {
+            if (msg.mentions.members.first().user === client.user) {
+                msg.channel.send("no")
+                    .catch(err => console.error(err));
+                return;
+            }
+        } catch {
+            console.log(msg.mentions.members.first());
+            console.log(msg.mentions.members.first().user);
         }
-
         const reason: string = args.length === 1 ? "No reason was provided" : args.shift().toString().replace(/,/g, ' ');
 
         const message = await msg.channel.send(`Are you sure you want to ban **${msg.mentions.members.first().user.tag}**`);
