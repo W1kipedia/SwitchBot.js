@@ -14,7 +14,7 @@ export interface Config {
         password: string
     },
     id: {
-        owner : number,
-        guestRole: number
+        owner : string,
+        guestRole: string
     }
 }
