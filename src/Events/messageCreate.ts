@@ -1,6 +1,5 @@
 import { Events, Command } from '../Interfaces'
 import { GuildEmoji, Message } from 'discord.js';
-import path from 'path';
 import { readFile, unlink } from 'fs/promises';
 
 export const event: Events = {
@@ -34,49 +33,56 @@ export const event: Events = {
                 })
                 .catch(err => console.error(err));
         });*/
-        if (msg.channel.id === '738155429342871623') {
-            var yes: GuildEmoji | string = '👍';
-            var no: GuildEmoji | string = '👎';
-            var think: GuildEmoji | string = '🤔';
-            msg.guild.emojis.cache.forEach((emote) => {
-                switch (emote.name) {
-                    case 'yes':
-                        yes = emote;
-                        break;
-                    case 'no':
-                        no = emote;
-                        break;
-                    case 'thronking':
-                        think = emote;
-                        break;
-                }
-            });
-            if (msg.author.id === client.config.id.owner.toString()) {
-                msg.react(yes)
-                    .then(() => {
-                        msg.react(no)
-                            .then(() => {
-                                msg.react(think)
-                                    .catch((err) => {
-                                        console.error(err);
-                                    })
-                            })
-                            .catch((err) => {
-                                console.error(err);
-                            })
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                    })
-            } else {
-                readFile('/tmp/guest.txt', {encoding: 'utf-8'})
-                .then((data) => {
-                    if (msg.author.id === data) {
-                        msg.react(yes)
-                            .then(() => {
-                                msg.react(no)
+        switch (msg.channel.id) {
+            // detects messages in #big-brain-thoughts
+            case '738155429342871623':
+                // these emojis are generated as a failsafe if retreiving the server emojis didn't work
+                var yes: GuildEmoji | string = '👍';
+                var no: GuildEmoji | string = '👎';
+                var think: GuildEmoji | string = '🤔';
+                msg.guild.emojis.cache.forEach((emote) => {
+                    switch (emote.name) {
+                        case 'yes':
+                            yes = emote;
+                            break;
+                        case 'no':
+                            no = emote;
+                            break;
+                        case 'thronking':
+                            think = emote;
+                            break;
+                    }
+                });
+                if (msg.author.id === client.config.id.owner.toString()) {
+                    msg.react(yes)
+                        .then(() => {
+                            msg.react(no)
+                                .then(() => {
+                                    msg.react(think)
+                                        .catch((err) => {
+                                            console.error(err);
+                                        })
+                                })
+                                .catch((err) => {
+                                    console.error(err);
+                                })
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        })
+                } else {
+                    readFile('/tmp/guest.txt', { encoding: 'utf-8' })
+                        .then((data) => {
+                            if (msg.author.id === data) {
+                                msg.react(yes)
                                     .then(() => {
-                                        msg.react(think)
+                                        msg.react(no)
+                                            .then(() => {
+                                                msg.react(think)
+                                                    .catch((err) => {
+                                                        console.error(err);
+                                                    })
+                                            })
                                             .catch((err) => {
                                                 console.error(err);
                                             })
@@ -84,34 +90,31 @@ export const event: Events = {
                                     .catch((err) => {
                                         console.error(err);
                                     })
-                            })
-                            .catch((err) => {
-                                console.error(err);
-                            })
-                        msg.member.roles.remove(client.config.id.guestRole.toString())
-                            .then(() => {
-                                console.log(`${msg.author.username} is no longer a guest`);
-                            })
-                            .catch((err) => {
-                                console.error(err);
-                            });
-                    }
-                })
-                .then(() => {
-                    unlink('/tmp/guest.txt')
-                        .then(() => {
-                            console.log("successfully delete /tmp/guest.txt");
+                                msg.member.roles.remove(client.config.id.guestRole.toString())
+                                    .then(() => {
+                                        console.log(`${msg.author.username} is no longer a guest`);
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                    });
+                            }
                         })
-                        .catch((err) => {
+                        .then(() => {
+                            unlink('/tmp/guest.txt')
+                                .then(() => {
+                                    console.log("successfully delete /tmp/guest.txt");
+                                })
+                                .catch((err) => {
+                                    console.error(err);
+                                })
+                        })
+                        .catch(async (err) => {
+                            await msg.delete();
                             console.error(err);
                         })
-                })
-                .catch(async (err) => {
-                    await msg.delete();
-                    console.error(err);
-                })
-            }
+                }
         }
+        
         if (!msg.content.toLocaleLowerCase().startsWith(client.config.prefix))  return;
         
         const args = msg.content
