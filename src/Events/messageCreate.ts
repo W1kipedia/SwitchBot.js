@@ -7,13 +7,18 @@ export const event: Events = {
     run: async (client, msg: Message) => {
         if (!msg.guild) return; 
         if (msg.author.bot) return;
-        if (msg.content.toLowerCase() === 'avocados 🥑 from mexico 🇲🇽') {
-            msg.react('🥑')
-            .then(() => {
-                msg.react('🇲🇽')
-                .catch(err => console.error(err));
-            })
-            .catch(err => console.error(err));
+        switch (msg.content.toLowerCase()) {
+            case 'avocados 🥑 from mexico 🇲🇽':
+                msg.react('🥑')
+                    .then(() => {
+                        msg.react('🇲🇽')
+                            .catch(err => console.error(err));
+                    })
+                    .catch(err => console.error(err));
+            case 'ratio':
+                // the funny ratio command that was suggested by mago, hi mago if you reading this :D
+                msg.react('👍')
+                    .catch((err) => console.error(err));
         }
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
         /*msg.content.split(' ').forEach((word) => {
@@ -33,6 +38,7 @@ export const event: Events = {
                 })
                 .catch(err => console.error(err));
         });*/
+
         switch (msg.channel.id) {
             // detects messages in #big-brain-thoughts
             case '738155429342871623':

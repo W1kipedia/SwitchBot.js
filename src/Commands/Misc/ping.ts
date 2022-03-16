@@ -12,7 +12,7 @@ export const command: Command = {
         const m : Message = await msg.channel.send('Calculating ping... ⚙️');
 
         const outcomes = [
-            "what, you think I'm in the mood to calculate the ping? No, cry about it.",
+            "what, you think I'm in the mood to calculate the ping? cope.",
             `Latency is ${(Date.now() - msg.createdTimestamp)}ms\nAPI Latency is ${Math.round(client.ws.ping)}ms`
         ]
 
