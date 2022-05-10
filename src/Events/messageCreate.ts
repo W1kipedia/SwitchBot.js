@@ -15,10 +15,12 @@ export const event: Events = {
                             .catch(err => console.error(err));
                     })
                     .catch(err => console.error(err));
+                break;
             case 'ratio':
                 // the funny ratio command that was suggested by mago, hi mago if you reading this :D
                 msg.react('👍')
                     .catch((err) => console.error(err));
+                break;
         }
         if (msg.content.toLowerCase().startsWith('<@!752666067536576512>')) msg.channel.send('Use `s.help` to see all the commands!').catch(err => console.error(err));
         /*msg.content.split(' ').forEach((word) => {
