@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://discord.gg/CNBE4hPf3y">
+	<a href="https://discord.gg/p3wdX4gTbg">
 		<img alt="Discord" src="https://img.shields.io/discord/643082091961122816?label=Discord%20Server&logo=discord">
 	</a>
 </p>
